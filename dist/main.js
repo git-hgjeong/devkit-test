@@ -1,0 +1,1 @@
+(()=>{const e=document.createTextNode("Hello, Webpack!");document.body.appendChild(e)})();
