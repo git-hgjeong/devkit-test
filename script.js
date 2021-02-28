@@ -1,2 +1,5 @@
-const message = document.createTextNode("Hi, Webpack!")
-document.body.appendChild(message)
+import Vue from 'vue';
+
+import Page1 from './Page1';
+
+new Vue(Page1).$mount('#root');
