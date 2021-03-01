@@ -1,7 +1,4 @@
 import Vue from 'vue';
+import Work from './Work.vue';
 
-import Page1 from './Page1';
-import Header from './WorkHeader';
-
-new Vue(Header).$mount('#header'); 
-new Vue(Page1).$mount('#root'); 
+new Vue(Work).$mount('#root'); 
