@@ -16,12 +16,7 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li class="CI-MDI-TAB on2"><a href="#" title="[41001] 주가지수 월별 추이" class="CI-MDI-TAB-NAME"><span>[41001] 주가지수 월별 추이</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a>
-					</li>
-					<li class="CI-MDI-TAB"><a href="#" title="[42001] 종합정보(일)" class="CI-MDI-TAB-NAME"><span>[42001] 종합정보(일)</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a>
-					</li>
-					<li class="CI-MDI-TAB"><a href="#" title="[43001] 종합정보(일)" class="CI-MDI-TAB-NAME"><span>[43001] 종합정보(일)</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a>
-					</li>
+					<li v-for="(item, index) in midMenuList" class="CI-MDI-TAB"><a href="javascript:void(0);" @click="onClickMdiTap(item, index)"  v-bind:title="'['+item.mid+']'+' '+item.title" class="CI-MDI-TAB-NAME"><span>[{{item.mid}}] {{item.title}}</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -48,15 +43,45 @@
 </div>    
 </template>
 <script>
+import router from './routes';
+//components
 import Header from './WorkHeader';
 import LeftMenu from './LnbWork';
-import router from './routes';
 
 export default {
 	router,
     components: {
        'header-component':Header,
        'lnb-component':LeftMenu
-    }
+    },
+	data(){
+		return {
+			midMenuList:[ {mid:"41001", title:"주가지수 월별 추이", link:"page1"},
+					{mid:"42001", title:"종합정보(월)", link:"page2"},
+					{mid:"43001", title:"종합정보(일)", link:"page3"} 
+			]
+		}
+	},
+	methods: {
+		onClickMdiTap(item, index){
+			console.log("link", index, item.link);
+			//router.push({ path: link, query: { plan: 'private' }})
+			router.push({ path: item.link});
+		}
+	},
+	mounted() {
+		//console.log(this.$router);
+		//console.log(this.$route);
+		//Get 파라메터 획득
+		console.log("Query String:", this.$route.query);
+		
+		/*
+			https://router.vuejs.org/kr/guide/
+			1) Code Split.(Lazy Loading)
+			2) Hash router vs History router
+			   SEO, URL... -> History router.
+			3) History router reload problem.
+		*/
+	}	
 }
 </script>
