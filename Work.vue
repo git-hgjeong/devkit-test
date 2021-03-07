@@ -16,7 +16,7 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" class="CI-MDI-TAB"><a href="javascript:void(0);" @click="onClickMdiTap(item, index)"  v-bind:title="'['+item.mid+']'+' '+item.title" class="CI-MDI-TAB-NAME"><span>[{{item.mid}}] {{item.title}}</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:class="item.tabClass"><a href="javascript:void(0);" @click="onClickMdiTap(item, index)"  v-bind:title="'['+item.mid+']'+' '+item.title" class="CI-MDI-TAB-NAME"><span>[{{item.mid}}] {{item.title}}</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -56,9 +56,9 @@ export default {
     },
 	data(){
 		return {
-			midMenuList:[ {mid:"41001", title:"주가지수 월별 추이", link:"page1"},
-					{mid:"42001", title:"종합정보(월)", link:"page2"},
-					{mid:"43001", title:"종합정보(일)", link:"page3"} 
+			midMenuList:[ {mid:"41001", title:"주가지수 월별 추이", link:"page1", tabClass:"CI-MDI-TAB"},
+					{mid:"42001", title:"종합정보(월)", link:"page2", tabClass:"CI-MDI-TAB"},
+					{mid:"43001", title:"종합정보(일)", link:"page3", tabClass:"CI-MDI-TAB"} 
 			]
 		}
 	},
@@ -66,6 +66,17 @@ export default {
 		onClickMdiTap(item, index){
 			console.log("link", index, item.link);
 			//router.push({ path: link, query: { plan: 'private' }})
+
+			//MDI 메뉴탭 초기화
+			this.midMenuList.forEach(element => {
+				var cssClass = element.tabClass;
+				if(cssClass && cssClass.indexOf("on2") != -1){
+					element.tabClass = "CI-MDI-TAB";
+				}
+			});
+			item.tabClass = "CI-MDI-TAB on2";
+
+			//라우터 이동
 			router.push({ path: item.link});
 		}
 	},
