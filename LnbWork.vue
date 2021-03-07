@@ -677,6 +677,9 @@
 												</ul>
 											</li>
 										</ul>
+									</div><!-- //lnb_tree_box -->
+									<div class="lnb_tree_box">
+										
 									</div>
 								</li>
 							</ul>
@@ -954,13 +957,19 @@
 							</ul>
 						</li>
 					</ul>
-				</div> <span class="bottomround"></span>
+				</div> 
+				<div class="lnb_tree">
+					<ul class="lnb_tree_wrap" id="lnb">
+					</ul>
+				</div>
+				<span class="bottomround"></span>
 			</aside>
 			<button type="button" class="btn_lnb" id="jsMdiMenuButton" title="메뉴 열기/닫기"></button>        
     </div>    
 </template>
 <script>
 const menu = [
+				{"data-menu-id":"MDC0201", "title":"기본 통계"},
                 {"data-menu-id":"MDC020101", "title":"지수"},
                 {"data-menu-id":"MDC02010101", "title":"주가지수"},
                 {"data-menu-id":"MDC0201010101", "title":"전체지수 시세"},
@@ -1022,6 +1031,56 @@ const menu = [
             ];
 
 export default {
-    
+	data(){
+		return {
+		}
+	},
+	methods: {
+
+	},
+	mounted() {
+		//li > ul > li
+		menu.forEach(function(item, index){
+			console.log("["+ index +"]", item);
+			
+			
+			/*
+			https://kr.vuejs.org/v2/examples/tree-view.html
+			//Depth Start
+								<li class="on CI-MDI-MENU-ALWAYS-ACTIVE" data-depth-menu-id="MDC0201"> <a href="javascript:void(0);">기본 통계</a>
+									<ul style="display: block;">
+										<li class="freak">
+											<button>
+												<img src="http://data.krx.co.kr/templets/mdc/img/blit_all.png" /><span>전체열기</span>
+											</button>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<div class="lnb_tree_box">
+										<ul class="lnb_tree_root">
+
+
+											//1st Depth
+											<li><a href="javascript:void(0);">지수</a>
+												<ul>
+
+													//2nd Depth
+													<li> <a href="javascript:void(0);">주가지수</a>
+														<ul>
+															//last Depth
+															<li class="CI-MDI-MENU-NO-CHILD"><a href="javascript:void(0);" data-menu-id="MDC0201010101">전체지수 시세</a></li>
+														</ul>
+													</li>
+													
+												</ul>
+											</li>
+
+										</ul>
+									</div>
+								</li>
+			*/
+		});
+	}	
 }
 </script>
