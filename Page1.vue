@@ -140,7 +140,7 @@
 
               <button type="button" class="CI-MDI-COMPONENT-BUTTON btn_close_tggle">Close</button>
           </div>
-
+      </div>
           <div class="CI-MDI-UNIT-WRAP">
               <div class="time CI-MDI-UNIT" data-view-sequence="0" data-index="0">
                   <p class="CI-MDI-UNIT-TIME"><img src="http://data.krx.co.kr/templets/mdc/img/ico_clock.png" alt="시계" />2021.02.21 PM 06:01:04&nbsp;<span>(20분 지연 정보)</span></p>
