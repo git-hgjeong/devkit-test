@@ -968,7 +968,8 @@
     </div>    
 </template>
 <script>
-const menu = [
+
+const menu_test = [
 				{"data-menu-id":"MDC0201", "title":"기본 통계"},
 					{"data-menu-id":"MDC020101", "title":"지수"},
 						{"data-menu-id":"MDC02010101", "title":"주가지수"},
@@ -982,11 +983,10 @@ const menu = [
 
 						{"data-menu-id":"MDC02010102", "title":"채권지수"},
 							{"data-menu-id":"MDC0201010201", "title":"전체지수 시세"},
-							{"data-menu-id":"MDC0201010202", "title":"개별지수 시세 추이"},
-
+							{"data-menu-id":"MDC0201010202", "title":"개별지수 시세 추이"}
             ];
 
-const menu_backup = [
+const menu = [
 				{"data-menu-id":"MDC0201", "title":"기본 통계"},
 					{"data-menu-id":"MDC020101", "title":"지수"},
 						{"data-menu-id":"MDC02010101", "title":"주가지수"},
@@ -1049,47 +1049,36 @@ const menu_backup = [
             ];
 
 function setChildMenu(arrMenu, item){
-	//console.log(">>", arrMenu, item);
-	var mid = item['data-menu-id'];
-	var midLen = mid.length;
+	//console.log("arrMenu:", JSON.stringify(arrMenu));
+	var mid = item["data-menu-id"];
+	var prevMenu = arrMenu;
+	var prevMid =  prevMenu["data-menu-id"];
 	var parentMid = mid.substr(0, mid.length-2);
-	//console.log("parentMid:", parentMid, mid);
-	var chk = false;
 	
-	for(var i=arrMenu.length-1;i==0;i--){
-		console.log("["+ i +"]", arrMenu[i]["title"],arrMenu, arrMenu.length);
-		var tempItem = arrMenu[i];
-		var tempLen = tempItem['data-menu-id'].length;
-		//console.log(">>", tempItem['data-menu-id'], parentMid);
-		if(tempItem['data-menu-id'] == parentMid){
-			if(!tempItem["child"]){
-				tempItem["child"] = [];
-			}
-			tempItem["child"].push(item);
-			return;
+	if(parentMid == prevMid){
+		if(!prevMenu["child"]){
+			prevMenu["child"] = [];
+		}
+		prevMenu["child"].push(item);
+		return true;
+	}else{
+		var arr = prevMenu["child"];
+		if(!arr){
+			//console.log("no child:", JSON.stringify(prevMenu));
+			return false;
 		}else{
-			setChildMenu(tempItem["child"], item);
+			var cnt = arr.length;
+			//console.log(">>", mid, prevMid, parentMid, cnt,JSON.stringify(arr));
+			for(var i=0;i<cnt;i++){
+				var chk = setChildMenu(arr[i], item);
+				if(chk){
+					return true;
+				}
+			}
 		}
 	}
-	
+	return false;
 }
-/*
-				{"data-menu-id":"MDC0201", "title":"기본 통계"},
-					{"data-menu-id":"MDC020101", "title":"지수"},
-						{"data-menu-id":"MDC02010101", "title":"주가지수"},
-							{"data-menu-id":"MDC0201010101", "title":"전체지수 시세"},
-							{"data-menu-id":"MDC0201010102", "title":"전체지수 등락률"},
-							{"data-menu-id":"MDC0201010103", "title":"개별지수 시세 추이"},
-							{"data-menu-id":"MDC0201010104", "title":"전체지수 기본정보"},
-							{"data-menu-id":"MDC0201010105", "title":"개별지수 종합정보"},
-							{"data-menu-id":"MDC0201010106", "title":"지수구성종목"},
-							{"data-menu-id":"MDC0201010107", "title":"PER/PBR/배당수익률"},
-
-						{"data-menu-id":"MDC02010102", "title":"채권지수"},
-							{"data-menu-id":"MDC0201010201", "title":"전체지수 시세"},
-							{"data-menu-id":"MDC0201010202", "title":"개별지수 시세 추이"},
-*/
-
 
 export default {
 	data(){
@@ -1111,7 +1100,8 @@ export default {
 			}else{
 				var prevItem = arrMenu[arrIdx];
 				//console.log("prevItem:", prevItem);
-				setChildMenu(arrMenu, item);
+				//console.log("test:", item, JSON.stringify(arrMenu));
+				setChildMenu(prevItem, item);
 			}
 			/*
 			https://kr.vuejs.org/v2/examples/tree-view.html
