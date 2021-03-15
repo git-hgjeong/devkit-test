@@ -1,6 +1,6 @@
 <template>
-  <li><a href="javascript:void(0);">{{ item.name }}</a>
-    <ul v-if="isFolder">
+  <li><a href="javascript:void(0);" @click="toggle">{{ item.name }}</a>
+    <ul v-show="isOpen" v-if="isFolder">
       <tree-item
         v-for="(child, index) in item.children"
         :key="index"

@@ -45,7 +45,7 @@
     </div>    
 </template>
 <script>
-import TreeMenu from './TreeMenu';
+
 
 const menu_test = [
 				{"data-menu-id":"MDC0201", "title":"기본 통계"},
@@ -159,9 +159,6 @@ function setChildMenu(arrMenu, item){
 }
 
 export default {
-    components: {
-       'tree-item':TreeMenu
-    },	
 	data(){
 		return {
 			treeData: treeData
