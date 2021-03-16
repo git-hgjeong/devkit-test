@@ -1,5 +1,5 @@
 <template>
-  <li><a href="javascript:void(0);" @click="toggle">{{ item.name }}</a>
+  <li><a href="javascript:void(0);" @click="toggle" class="tree">{{ item.name }}</a>
     <ul v-show="isOpen" v-if="isFolder">
       <tree-item
         v-for="(child, index) in item.children"
@@ -63,3 +63,22 @@ export default {
 
 			*/
 </script>
+<style scoped>
+.item {
+  cursor: pointer;
+}
+.bold {
+  font-weight: bold;
+}
+.tree {
+  padding-left:18px;
+   font-size: 14px;
+   color: #dddddd;
+   background: url(http://data.krx.co.kr/templets/mdc/img/blit_4dep_off.png) no-repeat;
+}
+ul {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: dot;
+}
+</style>

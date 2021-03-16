@@ -21,8 +21,8 @@
 									</button>
 								</li>
 								<li>
-									<div class="lnb_tree_box">
-										<ul class="lnb_tree_root">
+									<div class="">
+										<ul style="padding:10px;">
 											<!-- 트리메뉴 -->
 											
 <tree-item
