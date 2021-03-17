@@ -1,5 +1,5 @@
 <template>
-  <li><a href="javascript:void(0);" @click="toggle" class="tree">{{ item.name }}</a>
+  <li><a href="javascript:void(0);" @click="toggle" class="tree tree-off">{{ item.name }}</a>
     <ul v-show="isOpen" v-if="isFolder">
       <tree-item
         v-for="(child, index) in item.children"
@@ -72,9 +72,14 @@ export default {
 }
 .tree {
   padding-left:18px;
-   font-size: 14px;
-   color: #dddddd;
-   background: url(http://data.krx.co.kr/templets/mdc/img/blit_4dep_off.png) no-repeat;
+  font-size: 14px;
+  color: #dddddd;
+}
+.tree-off{
+  background: url(http://data.krx.co.kr/templets/mdc/img/blit_4dep_off.png) no-repeat;
+}
+.tree-on{
+  background: url(http://data.krx.co.kr/templets/mdc/img/blit_4dep_on.png) no-repeat;
 }
 ul {
   padding-left: 1em;
