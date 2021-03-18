@@ -1,5 +1,5 @@
 <template>
-  <li><a href="javascript:void(0);" @click="toggle" class="tree tree-off">{{ item.name }}</a>
+  <li><a href="javascript:void(0);" @click="toggle" :class="icon">{{ item.name }}</a>
     <ul v-show="isOpen" v-if="isFolder">
       <tree-item
         v-for="(child, index) in item.children"
@@ -17,7 +17,8 @@ export default {
   },
   data: function () {
     return {
-      isOpen: false
+      isOpen: false,
+      icon:"tree tree-off",
     }
   },
   computed: {
@@ -29,13 +30,20 @@ export default {
   methods: {
     toggle: function () {
       if (this.isFolder) {
-        this.isOpen = !this.isOpen
+        this.isOpen = !this.isOpen;
+        if(this.isOpen){
+          this.icon = "tree tree-on";
+        }else{
+          this.icon = "tree tree-off";
+        }        
+      }else{
+        this.icon = "";
       }
     },
     makeFolder: function () {
       if (!this.isFolder) {
-      	this.$emit('make-folder', this.item)
-        this.isOpen = true
+      	this.$emit('make-folder', this.item);
+        this.isOpen = true;
       }
     }
   }    
