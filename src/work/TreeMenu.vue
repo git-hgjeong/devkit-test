@@ -17,6 +17,12 @@ export default {
     item: Object,
     defOpen: Boolean
   },
+  watch: { 
+    defOpen: function(newVal, oldVal) { // watch it
+      //console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      this.isOpen = newVal;
+    }
+  },  
   data: function () {
     return {
       isOpen: false
@@ -57,29 +63,8 @@ export default {
     this.isOpen = this.defOpen;
   }
 }
-
-			/*
-			https://kr.vuejs.org/v2/examples/tree-view.html
-			//Depth Start
-
-
-											//1st Depth
-											<li><a href="javascript:void(0);">지수</a>
-												<ul>
-
-													//2nd Depth
-													<li> <a href="javascript:void(0);">주가지수</a>
-														<ul>
-															//last Depth
-															<li class="CI-MDI-MENU-NO-CHILD"><a href="javascript:void(0);" data-menu-id="MDC0201010101">전체지수 시세</a></li>
-														</ul>
-													</li>
-													
-												</ul>
-											</li>
-
-			*/
 </script>
+
 <style scoped>
 .item {
   cursor: pointer;

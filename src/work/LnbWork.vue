@@ -16,8 +16,8 @@
 						<li class="on CI-MDI-MENU-ALWAYS-ACTIVE" data-depth-menu-id="MDC0201"> <a href="javascript:void(0);">기본 통계</a>
 							<ul style="display: block;">
 								<li class="freak">
-									<button>
-										<img src="http://data.krx.co.kr/templets/mdc/img/blit_all.png" /><span>전체열기</span>
+									<button @click="toggleMenuAll">
+										<img :src="menuAllIcon" /><span>{{menuAllText}}</span>
 									</button>
 								</li>
 								<li>
@@ -158,12 +158,20 @@ function setChildMenu(arrMenu, item){
 	}
 	return false;
 }
+///templets/mdc/img/blit_s.png
+
+const menuAllCloseIcon = "http://data.krx.co.kr/templets/mdc/img/blit_all.png";
+const menuAllCloseText = "전체열기";
+const menuAllOpenIcon = "http://data.krx.co.kr/templets/mdc/img/blit_s.png";
+const menuAllOpenText = "전체닫기";
 
 export default {
 	data(){
 		return {
 			treeData: {},
-			treeDefOpen: false
+			treeDefOpen: false,
+			menuAllIcon: menuAllCloseIcon,
+			menuAllText: menuAllCloseText
 		}
 	},
 	methods: {
@@ -176,6 +184,19 @@ export default {
 				item.children.push({
 				name: 'new stuff'
 			})
+		},
+		toggleMenuAll: function(){
+			if(this.treeDefOpen){
+				this.treeDefOpen = false;
+				this.menuAllIcon = menuAllCloseIcon;
+				this.menuAllText = menuAllCloseText;
+				console.log("1");
+			}else{
+				this.treeDefOpen = true;
+				this.menuAllIcon = menuAllOpenIcon;
+				this.menuAllText = menuAllOpenText;
+				console.log("2");
+			}
 		}
 	},
 	mounted() {
