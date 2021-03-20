@@ -5,6 +5,7 @@
         v-for="(child, index) in item.children"
         :key="index"
         :item="child"
+        :defOpen="defOpen"
       ></tree-item>
     </ul>
   </li>
@@ -13,7 +14,8 @@
 
 export default {  
   props: {
-    item: Object
+    item: Object,
+    defOpen: Boolean
   },
   data: function () {
     return {
@@ -49,7 +51,11 @@ export default {
         this.isOpen = true;
       }
     }
-  }    
+  },
+	mounted() {
+    console.log("defOpen:", this.defOpen);
+    this.isOpen = this.defOpen;
+  }
 }
 
 			/*
