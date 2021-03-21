@@ -28,6 +28,7 @@
 <tree-item
     :item="treeData"
 	:defOpen="treeDefOpen"
+	@clickMenu="openMdi"
   ></tree-item>
 										</ul>
 									</div>
@@ -98,7 +99,9 @@ export default {
 		}
 	},
 	methods: {
-
+		openMdi: function(item){
+			console.log("menu item click:", item);
+		},
 		makeFolder: function (item) {
 			Vue.set(item, 'children', [])
 			this.addItem(item)

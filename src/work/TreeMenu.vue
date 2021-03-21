@@ -6,6 +6,7 @@
         :key="index"
         :item="child"
         :defOpen="defOpen"
+        @clickMenu="recursiveClickMenu"
       ></tree-item>
     </ul>
   </li>
@@ -45,9 +46,16 @@ export default {
     }
   },
   methods: {
+    recursiveClickMenu: function(item){
+      console.log("clickMen:", item);
+      this.$emit('clickMenu', item);
+    },
     toggle: function () {
       if (this.isFolder) {
         this.item.isOpen = !this.item.isOpen;
+      }else{
+        console.log("clickMenu!!");
+        this.$emit('clickMenu', this.item);
       }
     },
     makeFolder: function () {
