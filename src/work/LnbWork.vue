@@ -28,7 +28,7 @@
 <tree-item
     :item="treeData"
 	:defOpen="treeDefOpen"
-	@clickMenu="openMdi"
+	@clickMenu="clickMenu"
   ></tree-item>
 										</ul>
 									</div>
@@ -98,9 +98,10 @@ export default {
 			menuAllText: menuAllCloseText
 		}
 	},
-	methods: {
-		openMdi: function(item){
-			console.log("menu item click:", item);
+	methods: {		
+		clickMenu: function(item){
+			console.log("LnbWork clickMenu:", item);
+			this.$emit('clickMenu', item);
 		},
 		makeFolder: function (item) {
 			Vue.set(item, 'children', [])

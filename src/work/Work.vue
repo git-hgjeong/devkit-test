@@ -9,14 +9,14 @@
 		<!-- CONTAINER -->
 		<section id="container" class="container">
 			<!-- LBN -->
-			<lnb-component :menu="menuList"></lnb-component>
+			<lnb-component :menu="menuList" @clickMenu="openMdi"></lnb-component>
 			<!-- //LNB -->
 			<!-- CONTENT -->
 			<section class="content CI-MDI-WRAP" style="">
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" v-bind:key="item" class="CI-MDI-TAB"><a href="javascript:void(0);" @click="onClickMdiTap(item, index)"  v-bind:title="'['+item.mid+']'+' '+item.title" class="CI-MDI-TAB-NAME"><span>{{item.name}}</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB"><a href="javascript:void(0);" @click="onClickMdiTap(item, index)"  v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span>{{item.name}}</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -124,6 +124,13 @@ export default {
 		}
 	},
 	methods: {
+		openMdi(item){
+			console.log("click menu :", item.name, item.link);
+			item["tabClass"] = "CI-MDI-TAB";
+			if(item.link){
+				this.midMenuList.push(item);
+			}
+		},
 		onClickMdiTap(item, index){
 			console.log("link", index, item.link);
 			//router.push({ path: link, query: { plan: 'private' }})

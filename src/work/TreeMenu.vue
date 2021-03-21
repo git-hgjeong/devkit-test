@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     recursiveClickMenu: function(item){
-      console.log("clickMen:", item);
       this.$emit('clickMenu', item);
     },
     toggle: function () {
