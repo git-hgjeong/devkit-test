@@ -26,7 +26,8 @@ module.exports = {
             },
             hash: true,
             template: './src/html/work.html',
-            filename:'work.html'
+            filename:'work.html',
+            inject: 'body',
            })        
     ],
     output:{

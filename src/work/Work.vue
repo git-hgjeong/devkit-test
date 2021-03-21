@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="root">
 	<div id="accessibility"> <a href="#container">본문내용 바로가기</a>
 	</div>
 	<div class="wrap wrap_nodata">

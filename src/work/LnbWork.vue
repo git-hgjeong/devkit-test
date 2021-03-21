@@ -87,7 +87,7 @@ const menuAllOpenText = "전체 닫기";
 
 export default {
 	props: {
-    	menu: Object,
+    	menu: Array,
   	},	
 	data(){
 		return {
