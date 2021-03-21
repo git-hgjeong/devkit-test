@@ -16,7 +16,7 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB"><a href="javascript:void(0);" @click="onClickMdiTap(item, index)"  v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span>{{item.name}}</span><button type="button" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="onClickMdiTap(item, index)">{{item.name}}</span><button type="button" @click="onClickMdiTapClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -129,6 +129,7 @@ export default {
 			item["tabClass"] = "CI-MDI-TAB";
 			if(item.link){
 				this.midMenuList.push(item);
+				this.onClickMdiTap(item, this.midMenuList.length -1 );
 			}
 		},
 		onClickMdiTap(item, index){
@@ -146,6 +147,16 @@ export default {
 
 			//라우터 이동
 			router.push({ path: item.link});
+		},
+		onClickMdiTapClose(index){
+			this.midMenuList.splice(index, 1);
+			if(this.midMenuList.length <=0 ){
+				router.push({ path: "/"});
+			}else{
+				let lastItem = this.midMenuList[this.midMenuList.length-1];
+				router.push({ path: lastItem.link});
+			}
+			
 		}
 	},
 	mounted() {

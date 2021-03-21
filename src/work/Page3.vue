@@ -1,7 +1,7 @@
 <template>
       <div class="CI-MDI-CONTENT active">
           <h2 class="tit_h2">
-              <p>[43001] 종합정보(일)</p>
+              <p>[43001] 개별지수 시세 추이</p>
               <p class="address_top">
                   <span><img src="http://data.krx.co.kr/templets/mdc/img/ico_house.png" alt="홈으로 이동" /></span>
 

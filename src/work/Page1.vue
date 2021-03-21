@@ -1,7 +1,7 @@
 <template>
 <div class="CI-MDI-CONTENT active">
     <h2 class="tit_h2">
-      <p>[41001] 주가지수 월별 추이</p>
+      <p>[41001] 전체지수 시세</p>
       <p class="address_top">
           <span><img src="http://data.krx.co.kr/templets/mdc/img/ico_house.png" alt="홈으로 이동" /></span>
           <span>쉽게 보는 통계</span>
