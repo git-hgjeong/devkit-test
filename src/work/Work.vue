@@ -16,12 +16,12 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="onClickMdiTap(item, index)">{{item.name}}</span><button type="button" @click="onClickMdiTapClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" :class="item.tabClass"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="onClickMdiTap(item, index)">{{item.name}}</span><button type="button" @click="onClickMdiTapClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
 						<!-- Page -->
-						<router-view></router-view>
+						<router-view @openPage="openPage"></router-view>
 						<!-- //Page-->
 					</div>
 				</section>
@@ -126,27 +126,40 @@ export default {
 	methods: {
 		openMdi(item){
 			console.log("click menu :", item.name, item.link);
-			item["tabClass"] = "CI-MDI-TAB";
-			if(item.link){
-				this.midMenuList.push(item);
-				this.onClickMdiTap(item, this.midMenuList.length -1 );
-			}
-		},
-		onClickMdiTap(item, index){
-			console.log("link", index, item.link);
-			//router.push({ path: link, query: { plan: 'private' }})
-
+			
 			//MDI 메뉴탭 초기화
+			/*
 			this.midMenuList.forEach(element => {
 				var cssClass = element.tabClass;
 				if(cssClass && cssClass.indexOf("on2") != -1){
 					element.tabClass = "CI-MDI-TAB";
 				}
 			});
-			item.tabClass = "CI-MDI-TAB on2";
+			*/
+			let cssChk = this.midMenuList.filter(item => item.cssClass && (item.cssClass.indexOf("on2") != -1));
+			cssChk.forEach(element => {
+				element.tabClass = "CI-MDI-TAB";
+			});
 
-			//라우터 이동
-			router.push({ path: item.link});
+			item["tabClass"] = "CI-MDI-TAB on2";
+			let mid = item["mid"];
+			let result = this.midMenuList.filter(item => item.mid == mid);
+			if(result.length <= 0 && item.link){
+				this.midMenuList.push(item);
+				this.onClickMdiTap(item, this.midMenuList.length -1 );
+			}else{
+				console.log(result[0].name + " is exist menu");
+			}
+		},
+		onClickMdiTap(item, index){
+			let link = "/" + item.link;
+			let nowLink = router.currentRoute.path;
+			if(item.link && link != nowLink){
+				console.log("link", index, item.link);
+				//router.push({ path: link, query: { plan: 'private' }})
+				//라우터 이동
+				router.push({ path: item.link});
+			}
 		},
 		onClickMdiTapClose(index){
 			this.midMenuList.splice(index, 1);
@@ -157,6 +170,10 @@ export default {
 				router.push({ path: lastItem.link});
 			}
 			
+		},
+		openPage(item){
+			console.log("openPage run!!");
+			this.openMdi(item);
 		}
 	},
 	mounted() {
@@ -164,13 +181,14 @@ export default {
 		//console.log(this.$route);
 		//Get 파라메터 획득
 		console.log("Query String:", this.$route.query);
-		
+		console.log("currentRoute:", router.currentRoute);
 		/*
 			https://router.vuejs.org/kr/guide/
 			1) Code Split.(Lazy Loading)
 			2) Hash router vs History router
 			   SEO, URL... -> History router.
 			3) History router reload problem.
+			https://webisfree.com/2019-03-25/[vuejs]-vue-router-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-%EB%9D%BC%EC%9A%B0%ED%8A%B8-%EC%84%A4%EC%A0%95
 		*/
 	}	
 }

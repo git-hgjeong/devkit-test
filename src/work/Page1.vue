@@ -873,6 +873,9 @@ export default {
     },
     methods : {
 
+    },
+    created: function () {
+        this.$emit('openPage', {"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"page1"});
     }    
 }
 </script>

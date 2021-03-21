@@ -434,7 +434,10 @@ export default {
     },
     methods : {
 
-    }    
+    },
+    created: function () {
+        this.$emit('openPage', {"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"page2"});
+    }
 }
 </script>
 
