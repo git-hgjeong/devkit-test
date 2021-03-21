@@ -1,6 +1,6 @@
 <template>
   <li><a href="javascript:void(0);" @click="toggle" :class="getClass">{{ item.name }}</a>
-    <ul v-show="isOpen" v-if="isFolder">
+    <ul v-show="item.isOpen" v-if="isFolder">
       <tree-item
         v-for="(child, index) in item.children"
         :key="index"
@@ -20,12 +20,11 @@ export default {
   watch: { 
     defOpen: function(newVal, oldVal) { // watch it
       //console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-      this.isOpen = newVal;
+      this.item.isOpen = newVal;
     }
   },  
   data: function () {
     return {
-      isOpen: false
     }
   },
   computed: {
@@ -35,7 +34,7 @@ export default {
     },
     getClass: function(){
      if (this.isFolder) {
-        if(this.isOpen){
+        if(this.item.isOpen){
           return "tree tree-on";
         }else{
           return "tree tree-off";
@@ -48,19 +47,17 @@ export default {
   methods: {
     toggle: function () {
       if (this.isFolder) {
-        this.isOpen = !this.isOpen;
+        this.item.isOpen = !this.item.isOpen;
       }
     },
     makeFolder: function () {
       if (!this.isFolder) {
       	this.$emit('make-folder', this.item);
-        this.isOpen = true;
+        this.item.isOpen = true;
       }
     }
   },
 	mounted() {
-    console.log("defOpen:", this.defOpen);
-    this.isOpen = this.defOpen;
   }
 }
 </script>
