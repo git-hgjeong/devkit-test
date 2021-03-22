@@ -16,7 +16,7 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" :class="item.tabClass"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="onClickMdiTap(item, index)">{{item.name}}</span><button type="button" @click="onClickMdiTapClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB" :class="{on2 : item.isSelect}"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="onClickMdiTap(item, index)">{{item.name}}</span><button type="button" @click="onClickMdiTapClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -110,7 +110,7 @@ const dataMenu = [
 							{"mid":"MDC020102050703", "name":"뮤추얼펀드 대용가", isOpen:false}
             ];
 
-//{mid:"41001", title:"주가지수 월별 추이", link:"page1", tabClass:"CI-MDI-TAB"},
+//{mid:"41001", title:"주가지수 월별 추이", link:"page1", isSelect:"CI-MDI-TAB"},
 export default {
 	router,
     components: {
@@ -130,22 +130,23 @@ export default {
 			//MDI 메뉴탭 초기화
 			/*
 			this.midMenuList.forEach(element => {
-				var cssClass = element.tabClass;
-				if(cssClass && cssClass.indexOf("on2") != -1){
-					element.tabClass = "CI-MDI-TAB";
+				var isSelect = element.isSelect;
+				if(isSelect && isSelect.indexOf("on2") != -1){
+					element.isSelect = "CI-MDI-TAB";
 				}
 			});
 			*/
-			let cssChk = this.midMenuList.filter(item => item.cssClass && (item.cssClass.indexOf("on2") != -1));
+			let cssChk = this.midMenuList.filter(item => item.isSelect);
 			cssChk.forEach(element => {
-				element.tabClass = "CI-MDI-TAB";
+				element["isSelect"] = false;
 			});
 
-			item["tabClass"] = "CI-MDI-TAB on2";
+			item["isSelect"] = true;
 			let mid = item["mid"];
 			let result = this.midMenuList.filter(item => item.mid == mid);
 			if(result.length <= 0 && item.link){
 				this.midMenuList.push(item);
+				console.log("midMenuList:",  this.midMenuList);
 				this.onClickMdiTap(item, this.midMenuList.length -1 );
 			}else{
 				console.log(result[0].name + " is exist menu");
