@@ -147,16 +147,17 @@ export default {
 			if(result.length <= 0 && item.link){
 				this.midMenuList.push(item);
 				console.log("midMenuList:",  this.midMenuList);
-				this.onClickMdiTap(item, this.midMenuList.length -1 );
+				this.onClickMdiTap(item );
 			}else{
-				console.log(result[0].name + " is exist menu");
+				result[0].isSelect = true;
+				this.onClickMdiTap(result[0] );
 			}
 		},
-		onClickMdiTap(item, index){
+		onClickMdiTap(item){
 			let link = "/" + item.link;
 			let nowLink = router.currentRoute.path;
 			if(item.link && link != nowLink){
-				console.log("link", index, item.link);
+				console.log("link", item.link);
 				//router.push({ path: link, query: { plan: 'private' }})
 				//라우터 이동
 				router.push({ path: item.link});
