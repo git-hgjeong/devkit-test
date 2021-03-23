@@ -358,7 +358,7 @@ export default {
 
     },
     created: function () {
-        this.$emit('openPage', {"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"page3"});
+        //this.$emit('openPage', {"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"page3"});
     }  
 }
 </script>

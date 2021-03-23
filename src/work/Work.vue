@@ -16,7 +16,7 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB" :class="{on2 : item.isSelect}"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="onClickMdiTap(item, index)">{{item.name}}</span><button type="button" @click="onClickMdiTapClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB" :class="{on2 : item.isSelect}"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="activeMdiTab(item, index)">{{item.name}}</span><button type="button" @click="activeMdiTabClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -52,9 +52,9 @@ const dataMenu = [
 				{"mid":"MDC0201", "name":"기본 통계", isOpen:true},
 					{"mid":"MDC020101", "name":"지수", isOpen:true},
 						{"mid":"MDC02010101", "name":"주가지수", isOpen:true},
-							{"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"page1"},
-							{"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"page2"},
-							{"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"page3"},
+							{"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"/page1"},
+							{"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"/page2"},
+							{"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"/page3"},
 							{"mid":"MDC0201010104", "name":"전체지수 기본정보", isOpen:false},
 							{"mid":"MDC0201010105", "name":"개별지수 종합정보", isOpen:false},
 							{"mid":"MDC0201010106", "name":"지수구성종목", isOpen:false},
@@ -125,7 +125,7 @@ export default {
 	},
 	methods: {
 		openMdi(item){
-			console.log("click menu :", item.name, item.link);
+			console.log("click menu :", item["mid"], item.name, item.link);
 			
 			//MDI 메뉴탭 초기화
 			/*
@@ -136,25 +136,32 @@ export default {
 				}
 			});
 			*/
+			
+			let mid = item["mid"];
+			let result = this.midMenuList.filter(item => item.mid == mid);
+			if(item.link){
+				if(result.length <= 0){
+					this.midMenuList.push(item);
+					console.log("midMenuList:",  this.midMenuList);
+					this.activeMdiTab(this.midMenuList[this.midMenuList.length - 1] );
+				}else{
+					this.activeMdiTab(result[0]);
+				}
+			}
+		},
+		activeMdiTab(item){
+			if(!item.link){
+				return;
+			}
+			//MDI탭 Select처리
 			let cssChk = this.midMenuList.filter(item => item.isSelect);
 			cssChk.forEach(element => {
 				element["isSelect"] = false;
-			});
-
+			});			
 			item["isSelect"] = true;
-			let mid = item["mid"];
-			let result = this.midMenuList.filter(item => item.mid == mid);
-			if(result.length <= 0 && item.link){
-				this.midMenuList.push(item);
-				console.log("midMenuList:",  this.midMenuList);
-				this.onClickMdiTap(item );
-			}else{
-				result[0].isSelect = true;
-				this.onClickMdiTap(result[0] );
-			}
-		},
-		onClickMdiTap(item){
-			let link = "/" + item.link;
+
+			//Route 이동
+			let link = item.link;
 			let nowLink = router.currentRoute.path;
 			if(item.link && link != nowLink){
 				console.log("link", item.link);
@@ -163,15 +170,14 @@ export default {
 				router.push({ path: item.link});
 			}
 		},
-		onClickMdiTapClose(index){
+		activeMdiTabClose(index){
 			this.midMenuList.splice(index, 1);
 			if(this.midMenuList.length <=0 ){
 				router.push({ path: "/"});
 			}else{
 				let lastItem = this.midMenuList[this.midMenuList.length-1];
-				router.push({ path: lastItem.link});
+				this.activeMdiTab(lastItem);
 			}
-			
 		},
 		openPage(item){
 			console.log("openPage run!!");
@@ -183,7 +189,18 @@ export default {
 		//console.log(this.$route);
 		//Get 파라메터 획득
 		console.log("Query String:", this.$route.query);
-		console.log("currentRoute:", router.currentRoute);
+		console.log("currentRoute:", router.currentRoute.path);
+
+		//링크로 타고 들어왔을때 MDI탭 생성
+		if(router.currentRoute.path){
+			let result = this.menuList.filter(item => item.link == router.currentRoute.path);
+			if(result.length > 0){
+				this.midMenuList.push(result[0]);
+				this.activeMdiTab(this.midMenuList[this.midMenuList.length - 1] );
+			}
+		}
+		
+		//
 		/*
 			https://router.vuejs.org/kr/guide/
 			1) Code Split.(Lazy Loading)

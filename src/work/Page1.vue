@@ -10,14 +10,14 @@
           <span>주가지수 월별 추이</span>
       </p>
     </h2>
-      <div class="search_tb">
-          <div data-component="search">
-              <table>
-                  <colgroup>
-                      <col class="fix_w_s5" />
-                      <col />
-                  </colgroup>
-                  <tbody>
+    <div class="search_tb">
+        <div data-component="search">
+            <table>
+            <colgroup>
+                <col class="fix_w_s5" />
+                <col />
+            </colgroup>
+            <tbody>
                       <tr>
                           <th scope="row">지수구분</th>
                           <td>
@@ -134,14 +134,14 @@
                           </td>
                       </tr>
                   </tbody>
-              </table>
+            </table>
 
-              <a href="javascript:void(0);" class="btn_black btn_component_search" name="search" id="jsSearchButton">조회</a>
+            <a href="javascript:void(0);" class="btn_black btn_component_search" name="search" id="jsSearchButton">조회</a>
 
-              <button type="button" class="CI-MDI-COMPONENT-BUTTON btn_close_tggle">Close</button>
-          </div>
-      </div>
-          <div class="CI-MDI-UNIT-WRAP">
+            <button type="button" class="CI-MDI-COMPONENT-BUTTON btn_close_tggle">Close</button>
+        </div>
+
+        <div class="CI-MDI-UNIT-WRAP">
               <div class="time CI-MDI-UNIT" data-view-sequence="0" data-index="0">
                   <p class="CI-MDI-UNIT-TIME"><img src="http://data.krx.co.kr/templets/mdc/img/ico_clock.png" alt="시계" />2021.02.21 PM 06:01:04&nbsp;<span>(20분 지연 정보)</span></p>
 
@@ -164,11 +164,11 @@
                       <button type="button" class="CI-MDI-UNIT-DOWNLOAD"><img src="http://data.krx.co.kr/templets/mdc/img/btn_time1.png" title="다운로드 팝업" /></button>
                   </p>
               </div>
-          </div>
+        </div>
 
-          <input type="hidden" name="csvxls_isNo" value="false" />
+        <input type="hidden" name="csvxls_isNo" value="false" />
 
-          <div class="CI-GRID-AREA CI-GRID-ON-WINDOWS CI-GRID-CLICKED" style="display: block;">
+        <div class="CI-GRID-AREA CI-GRID-ON-WINDOWS CI-GRID-CLICKED" style="display: block;">
               <div class="CI-GRID-WRAPPER" style="padding-right: 15px; padding-bottom: 15px;">
                   <div class="CI-GRID-MAIN-WRAPPER" style="overflow: hidden; position: relative; z-index: 3;">
                       <div class="CI-GRID-HEADER-WRAPPER">
@@ -604,9 +604,9 @@
               <div class="CI-FREEZE-INDICATOR-LEFT"></div>
               <div class="CI-FREEZE-INDICATOR-RIGHT"></div>
               <a href="#" class="CI-GRID-FOCUS-ESCAPER">그리드에서 빠져나오시려면 ESC키를 눌러주세요.</a>
-          </div>
+        </div>
 
-          <div class="CI-GRID-AREA CI-GRID-ON-WINDOWS" style="display: none;">
+        <div class="CI-GRID-AREA CI-GRID-ON-WINDOWS" style="display: none;">
               <div class="CI-GRID-WRAPPER" style="padding-right: 15px; padding-bottom: 15px;">
                   <div class="CI-GRID-MAIN-WRAPPER" style="overflow: hidden; position: relative; z-index: 3;">
                       <div class="CI-GRID-HEADER-WRAPPER">
@@ -846,9 +846,9 @@
               <div class="CI-FREEZE-INDICATOR-LEFT"></div>
               <div class="CI-FREEZE-INDICATOR-RIGHT"></div>
               <a href="#" class="CI-GRID-FOCUS-ESCAPER">그리드에서 빠져나오시려면 ESC키를 눌러주세요.</a>
-          </div>
+        </div>
 
-          <div class="result_bottom CI-MDI-COMPONENT-FOOTER on2">
+        <div class="result_bottom CI-MDI-COMPONENT-FOOTER on2">
               <button type="button" class="CI-MDI-COMPONENT-BUTTON">Open</button>
 
               <div data-component="footer" style="display: none;">
@@ -860,8 +860,8 @@
 
                   <p><img src="http://data.krx.co.kr/templets/mdc/img/blit_feel.png" alt="" />&nbsp;본 정보는 투자참고 사항이며, 오류가 발생하거나 지연될 수 있습니다. 제공된 정보에 의한 투자결과에 대한 법적인 책임을 지지 않습니다.</p>
               </div>
-          </div>
-      </div>
+        </div>
+    </div>
       
 </div>
 </template>
@@ -875,7 +875,7 @@ export default {
 
     },
     created: function () {
-        this.$emit('openPage', {"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"page1"});
+        //this.$emit('openPage', {"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"page1"});
     }    
 }
 </script>
