@@ -13,7 +13,7 @@
     </h2>
     <!-- 검색조건 영역 -->
     <div class="search_tb">
-        <div data-component="search">
+        <div data-component="search" v-show="searchArea.isOpen">
             <table>
             <colgroup>
                 <col class="fix_w_s5" />
@@ -132,9 +132,8 @@
             </table>
 
             <a href="javascript:void(0);" class="btn_black btn_component_search" name="search" id="jsSearchButton">조회</a>
-
-            <button type="button" class="CI-MDI-COMPONENT-BUTTON btn_close_tggle">Close</button>
         </div><!-- //search -->
+        <button type="button" class="CI-MDI-COMPONENT-BUTTON btn_close_tggle" :class="{on2 : !searchArea.isOpen}" @click="toggleSearchArea">{{searchArea.btnText}}</button>
     </div><!-- //search_tb -->
     
     <!-- 테이블 버튼영역 -->
@@ -195,18 +194,24 @@
 export default {
     data(){
         return {
+            searchArea:{isOpen:true, btnText:"Close"},
             bottomArea:{isOpen:false, btnText:"Open"}
         }
     },
     methods : {
+        toggleSearchArea: function () {
+            this.toggleArea(this.searchArea);
+        },        
         toggleBottomArea: function () {
-            console.log("toggleBottomArea", this.bottomArea.isOpen);
-            if(this.bottomArea.isOpen){
-                this.bottomArea.isOpen = false;
-                this.bottomArea.btnText = "Close";
+            this.toggleArea(this.bottomArea);
+        },
+        toggleArea:function(objArea){
+            if(objArea.isOpen){
+                objArea.isOpen = false;
+                objArea.btnText = "Close";
             }else{
-                this.bottomArea.isOpen = true;
-                this.bottomArea.btnText = "Open";                
+                objArea.isOpen = true;
+                objArea.btnText = "Open";                
             } 
         }
     },
@@ -214,6 +219,7 @@ export default {
 
     }    
 }
+
 </script>
 
 <style scoped>
