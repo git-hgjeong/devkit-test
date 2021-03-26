@@ -711,7 +711,7 @@ select:disabled {background-color:#f3f3f3;}
 .result_bottom.on2 {z-index:0; border-bottom:1px solid #e8e8e8;}
 .result_bottom.on2 > button {z-index:1;}
 .result_bottom.on2 > button:before {top:10px; background:url(http://data.krx.co.kr/templets/mdc/img/btn_close_tggle2.png) no-repeat left top;}
-.result_bottom > div {background-color:#f1f2f9; border-top:1px solid #e8e8e8; padding:15px 14px 14px 14px; display:none;}
+.result_bottom > div {background-color:#f1f2f9; border-top:1px solid #e8e8e8; padding:15px 14px 14px 14px;}
 /*.result_bottom.on2 > div {display:block;}*/
 
 .result_bottom p {padding-bottom:0;vertical-align:top;}

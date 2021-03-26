@@ -174,9 +174,9 @@
 
 
     <div class="result_bottom CI-MDI-COMPONENT-FOOTER on2">
-            <button type="button" class="CI-MDI-COMPONENT-BUTTON">Open</button>
+            <button type="button" class="CI-MDI-COMPONENT-BUTTON" @click="toggleBottomArea">{{bottomArea.btnText}}</button>
 
-            <div data-component="footer" style="display: none;">
+            <div data-component="footer" v-show="bottomArea.isOpen">
                 <span><dfn>컨텐츠 문의</dfn>&nbsp;:&nbsp;(경)인덱스사업부, &nbsp;고객센터 (1577-0088)</span>
 
                 <p>
@@ -194,10 +194,21 @@
 <script>
 export default {
     data(){
-        return {}
+        return {
+            bottomArea:{isOpen:false, btnText:"Open"}
+        }
     },
     methods : {
-
+        toggleBottomArea: function () {
+            console.log("toggleBottomArea", this.bottomArea.isOpen);
+            if(this.bottomArea.isOpen){
+                this.bottomArea.isOpen = false;
+                this.bottomArea.btnText = "Close";
+            }else{
+                this.bottomArea.isOpen = true;
+                this.bottomArea.btnText = "Open";                
+            } 
+        }
     },
     created: function () {
 
