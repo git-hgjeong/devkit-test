@@ -21,7 +21,8 @@
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
 						<!-- Page -->
-						<router-view @openPage="openPage"></router-view>
+						<!-- router-view @openPage="openPage"></router-view -->
+						<div v-for="(item) in midMenuList" v-bind:key="item.mid" class="CI-MDI-CONTENT" :class="{active : item.isSelect}">{{item.name}}</div>
 						<!-- //Page-->
 					</div>
 				</section>
@@ -47,6 +48,10 @@ import router from './routes';
 //components
 import Header from './WorkHeader';
 import LeftMenu from './LnbWork';
+
+import page1 from './Page1';
+import page2 from './Page2';
+import page3 from './Page3';
 
 const dataMenu = [
 				{"mid":"MDC0201", "name":"기본 통계", isOpen:true},
@@ -153,13 +158,16 @@ export default {
 			if(!item.link){
 				return;
 			}
+			console.log("activeMdiTab:", JSON.stringify(this.midMenuList));
 			//MDI탭 Select처리
 			let cssChk = this.midMenuList.filter(item => item.isSelect);
 			cssChk.forEach(element => {
-				element["isSelect"] = false;
-			});			
-			item["isSelect"] = true;
-
+				console.log("now select:", item["name"]);
+				element.isSelect = false;
+			});	
+			item.isSelect = true;
+			console.log("now select:", JSON.stringify(this.midMenuList));
+			return;
 			//Route 이동
 			let link = item.link;
 			let nowLink = router.currentRoute.path;
@@ -188,9 +196,9 @@ export default {
 		//console.log(this.$router);
 		//console.log(this.$route);
 		//Get 파라메터 획득
-		console.log("Query String:", this.$route.query);
-		console.log("currentRoute:", router.currentRoute.path);
-
+		//console.log("Query String:", this.$route.query);
+		//console.log("currentRoute:", router.currentRoute.path);
+/*
 		//링크로 타고 들어왔을때 MDI탭 생성
 		if(router.currentRoute.path){
 			let result = this.menuList.filter(item => item.link == router.currentRoute.path);
@@ -199,7 +207,7 @@ export default {
 				this.activeMdiTab(this.midMenuList[this.midMenuList.length - 1] );
 			}
 		}
-		
+*/		
 		//
 		/*
 			https://router.vuejs.org/kr/guide/
