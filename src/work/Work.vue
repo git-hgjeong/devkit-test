@@ -51,17 +51,13 @@ import router from './routes';
 import Header from './WorkHeader';
 import LeftMenu from './LnbWork';
 
-import page1 from './Page1';
-import page2 from './Page2';
-import page3 from './Page3';
-
 const dataMenu = [
 				{"mid":"MDC0201", "name":"기본 통계", isOpen:true},
 					{"mid":"MDC020101", "name":"지수", isOpen:true},
 						{"mid":"MDC02010101", "name":"주가지수", isOpen:true},
-							{"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"page1"},
-							{"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"page2"},
-							{"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"page3"},
+							{"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"Page1"},
+							{"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"Page2"},
+							{"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"Page3"},
 							{"mid":"MDC0201010104", "name":"전체지수 기본정보", isOpen:false},
 							{"mid":"MDC0201010105", "name":"개별지수 종합정보", isOpen:false},
 							{"mid":"MDC0201010106", "name":"지수구성종목", isOpen:false},
@@ -122,10 +118,7 @@ export default {
 	router,
     components: {
        'header-component':Header,
-       'lnb-component':LeftMenu,
-	   'page1':page1,
-	   'page2':page2,
-	   'page3':page3
+       'lnb-component':LeftMenu
 
     },
 	data(){
@@ -141,7 +134,7 @@ export default {
 		cssChk.forEach(element => {
 			link = element.link;
 		});
-        return link;
+		return () => import(`./${link}`)
       }
     },	
 	methods: {
