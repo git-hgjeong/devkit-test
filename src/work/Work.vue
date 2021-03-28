@@ -22,7 +22,9 @@
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
 						<!-- Page -->
 						<!-- router-view @openPage="openPage"></router-view -->
-						<div v-for="(item) in midMenuList" v-bind:key="item.mid" class="CI-MDI-CONTENT" :class="{active : item.isSelect}">{{item.name}}</div>
+						<div v-for="(item) in midMenuList" v-bind:key="item.mid" class="CI-MDI-CONTENT" :class="{active : item.isSelect}">
+    						<component :is="component"></component>							
+						</div>
 						<!-- //Page-->
 					</div>
 				</section>
@@ -57,9 +59,9 @@ const dataMenu = [
 				{"mid":"MDC0201", "name":"기본 통계", isOpen:true},
 					{"mid":"MDC020101", "name":"지수", isOpen:true},
 						{"mid":"MDC02010101", "name":"주가지수", isOpen:true},
-							{"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"/page1"},
-							{"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"/page2"},
-							{"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"/page3"},
+							{"mid":"MDC0201010101", "name":"전체지수 시세", isOpen:false, link:"page1"},
+							{"mid":"MDC0201010102", "name":"전체지수 등락률", isOpen:false, link:"page2"},
+							{"mid":"MDC0201010103", "name":"개별지수 시세 추이", isOpen:false, link:"page3"},
 							{"mid":"MDC0201010104", "name":"전체지수 기본정보", isOpen:false},
 							{"mid":"MDC0201010105", "name":"개별지수 종합정보", isOpen:false},
 							{"mid":"MDC0201010106", "name":"지수구성종목", isOpen:false},
@@ -120,7 +122,11 @@ export default {
 	router,
     components: {
        'header-component':Header,
-       'lnb-component':LeftMenu
+       'lnb-component':LeftMenu,
+	   'page1':page1,
+	   'page2':page2,
+	   'page3':page3
+
     },
 	data(){
 		return {
@@ -128,19 +134,18 @@ export default {
 			midMenuList: []
 		}
 	},
+    computed: {
+      component () {
+		let link = "";
+		let cssChk = this.midMenuList.filter(item => item.isSelect);
+		cssChk.forEach(element => {
+			link = element.link;
+		});
+        return link;
+      }
+    },	
 	methods: {
 		openMdi(item){
-			console.log("click menu :", item["mid"], item.name, item.link);
-			
-			//MDI 메뉴탭 초기화
-			/*
-			this.midMenuList.forEach(element => {
-				var isSelect = element.isSelect;
-				if(isSelect && isSelect.indexOf("on2") != -1){
-					element.isSelect = "CI-MDI-TAB";
-				}
-			});
-			*/
 			
 			let mid = item["mid"];
 			let result = this.midMenuList.filter(item => item.mid == mid);
@@ -158,25 +163,15 @@ export default {
 			if(!item.link){
 				return;
 			}
-			console.log("activeMdiTab:", JSON.stringify(this.midMenuList));
-			//MDI탭 Select처리
-			let cssChk = this.midMenuList.filter(item => item.isSelect);
-			cssChk.forEach(element => {
-				console.log("now select:", item["name"]);
-				element.isSelect = false;
+			this.midMenuList.forEach( (element, index) => {
+				if(item.mid == element.mid){
+					element.isSelect = true;
+					this.changeArrMap(this.midMenuList, index, element);
+				}else if(element.isSelect){
+					element.isSelect = false;
+					this.changeArrMap(this.midMenuList, index, element);
+				}
 			});	
-			item.isSelect = true;
-			console.log("now select:", JSON.stringify(this.midMenuList));
-			return;
-			//Route 이동
-			let link = item.link;
-			let nowLink = router.currentRoute.path;
-			if(item.link && link != nowLink){
-				console.log("link", item.link);
-				//router.push({ path: link, query: { plan: 'private' }})
-				//라우터 이동
-				router.push({ path: item.link});
-			}
 		},
 		activeMdiTabClose(index){
 			this.midMenuList.splice(index, 1);
@@ -190,33 +185,18 @@ export default {
 		openPage(item){
 			console.log("openPage run!!");
 			this.openMdi(item);
+		},
+		changeArrMap(arr, idx, item){
+			var str = JSON.stringify(item);
+			var map = JSON.parse(str);
+			arr.splice(idx, 1, map);					
+		},
+		getMdiComponentName(link){
+			return require(link);
 		}
 	},
 	mounted() {
-		//console.log(this.$router);
-		//console.log(this.$route);
-		//Get 파라메터 획득
-		//console.log("Query String:", this.$route.query);
-		//console.log("currentRoute:", router.currentRoute.path);
-/*
-		//링크로 타고 들어왔을때 MDI탭 생성
-		if(router.currentRoute.path){
-			let result = this.menuList.filter(item => item.link == router.currentRoute.path);
-			if(result.length > 0){
-				this.midMenuList.push(result[0]);
-				this.activeMdiTab(this.midMenuList[this.midMenuList.length - 1] );
-			}
-		}
-*/		
-		//
-		/*
-			https://router.vuejs.org/kr/guide/
-			1) Code Split.(Lazy Loading)
-			2) Hash router vs History router
-			   SEO, URL... -> History router.
-			3) History router reload problem.
-			https://webisfree.com/2019-03-25/[vuejs]-vue-router-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-%EB%9D%BC%EC%9A%B0%ED%8A%B8-%EC%84%A4%EC%A0%95
-		*/
+
 	}	
 }
 </script>
