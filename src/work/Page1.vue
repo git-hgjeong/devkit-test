@@ -66,14 +66,16 @@
                               <input type="hidden" name="idx_upclss_cd" value="01" />
                               <input type="hidden" name="idx_midclss_cd" value="01" />
                             
-                                <input ref="comboInput" type="text" name="" value="" size="100">
-                                <div ref="comboDiv" style="position: fixed;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: comboLeft + 'px', top: comboTop + 'px' }">
+                                <input ref="comboInput" type="text" name="" value="" size="100" @click="showComboDiv">
+                                <div ref="comboDiv" v-show="comboOpen" style="position: fixed;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: comboLeft + 'px', top: comboTop + 'px' }">
                                     <ul>
                                         <li><input type="checkbox" value="1"><label>테스트1</label></li>
                                         <li><input type="checkbox" value="2"><label>테스트2</label></li>
                                         <li><input type="checkbox" value="3"><label>테스트3</label></li>
                                         <li><input type="checkbox" value="4"><label>테스트4</label></li>
                                     </ul>
+                                    <button type="button" @click="doApplyCombo">적용</button>
+                                    <button type="button" @click="doCloseCombo">닫기</button>
                                 </div>
                             
                           </td>
@@ -209,7 +211,8 @@ export default {
             bottomArea:{isOpen:false, btnText:"Open"},
             comboWidth:0,
             comboLeft:0,
-            comboTop:0
+            comboTop:0,
+            comboOpen:false
         }
     },
     methods : {
@@ -228,7 +231,7 @@ export default {
                 objArea.btnText = "Open";                
             } 
         },
-        setComboPos:function(){
+        showComboDiv:function(){
             let top = this.$refs.comboInput.getBoundingClientRect().top;
             let left = this.$refs.comboInput.getBoundingClientRect().left;
             let width = this.$refs.comboInput.getBoundingClientRect().width;
@@ -237,12 +240,22 @@ export default {
             this.comboTop = top+height;
             this.comboLeft = left;
             this.comboWidth = width;
+            this.comboOpen = true;
+        },
+        doApplyCombo:function(){
+            this.doCloseCombo();
+        },
+        doCloseCombo:function(){
+            this.comboOpen = false;
+        },
+        handleResize:function(){
+           this.doCloseCombo();
         }
     },
     created: function () {
     },
 	mounted() {
-        this.setComboPos();
+        window.addEventListener('resize', this.handleResize);
 	}    
 }
 
