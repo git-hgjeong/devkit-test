@@ -65,6 +65,17 @@
 
                               <input type="hidden" name="idx_upclss_cd" value="01" />
                               <input type="hidden" name="idx_midclss_cd" value="01" />
+                            
+                                <input ref="comboInput" type="text" name="" value="" size="100">
+                                <div ref="comboDiv" style="position: fixed;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: comboLeft + 'px', top: comboTop + 'px' }">
+                                    <ul>
+                                        <li><input type="checkbox" value="1"><label>테스트1</label></li>
+                                        <li><input type="checkbox" value="2"><label>테스트2</label></li>
+                                        <li><input type="checkbox" value="3"><label>테스트3</label></li>
+                                        <li><input type="checkbox" value="4"><label>테스트4</label></li>
+                                    </ul>
+                                </div>
+                            
                           </td>
                       </tr>
                       <tr>
@@ -195,7 +206,10 @@ export default {
     data(){
         return {
             searchArea:{isOpen:true, btnText:"Close"},
-            bottomArea:{isOpen:false, btnText:"Open"}
+            bottomArea:{isOpen:false, btnText:"Open"},
+            comboWidth:0,
+            comboLeft:0,
+            comboTop:0
         }
     },
     methods : {
@@ -213,11 +227,23 @@ export default {
                 objArea.isOpen = true;
                 objArea.btnText = "Open";                
             } 
+        },
+        setComboPos:function(){
+            let top = this.$refs.comboInput.getBoundingClientRect().top;
+            let left = this.$refs.comboInput.getBoundingClientRect().left;
+            let width = this.$refs.comboInput.getBoundingClientRect().width;
+            let height = this.$refs.comboInput.getBoundingClientRect().height;
+            console.log("comboInput:", top+height, left, width);
+            this.comboTop = top+height;
+            this.comboLeft = left;
+            this.comboWidth = width;
         }
     },
     created: function () {
-
-    }    
+    },
+	mounted() {
+        this.setComboPos();
+	}    
 }
 
 </script>
