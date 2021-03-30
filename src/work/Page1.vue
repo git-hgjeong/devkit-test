@@ -65,9 +65,9 @@
 
                               <input type="hidden" name="idx_upclss_cd" value="01" />
                               <input type="hidden" name="idx_midclss_cd" value="01" />
-                            
+                            <div style="position: relative;">
                                 <input ref="comboInput" type="text" name="" value="" size="100" @click="showComboDiv">
-                                <div ref="comboDiv" v-show="comboOpen" style="position: fixed;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: comboLeft + 'px', top: comboTop + 'px' }">
+                                <div ref="comboDiv" v-show="comboOpen" style="position: absolute;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: '0px', top: comboTop + 'px' }">
                                     <ul>
                                         <li><input type="checkbox" value="1"><label>테스트1</label></li>
                                         <li><input type="checkbox" value="2"><label>테스트2</label></li>
@@ -77,7 +77,7 @@
                                     <button type="button" @click="doApplyCombo">적용</button>
                                     <button type="button" @click="doCloseCombo">닫기</button>
                                 </div>
-                            
+                            </div>
                           </td>
                       </tr>
                       <tr>
@@ -232,14 +232,9 @@ export default {
             } 
         },
         showComboDiv:function(){
-            let top = this.$refs.comboInput.getBoundingClientRect().top;
-            let left = this.$refs.comboInput.getBoundingClientRect().left;
-            let width = this.$refs.comboInput.getBoundingClientRect().width;
             let height = this.$refs.comboInput.getBoundingClientRect().height;
-            console.log("comboInput:", top+height, left, width);
-            this.comboTop = top+height;
-            this.comboLeft = left;
-            this.comboWidth = width;
+            console.log("comboInput:", this.$refs.comboInput.getBoundingClientRect());
+            this.comboTop = height;
             this.comboOpen = true;
         },
         doApplyCombo:function(){
