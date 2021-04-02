@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>변환</title>
+        
+		<style>
+			.ellipsis {font:9pt ; width:100%; overflow:hidden; text-overflow:ellipsis; text-align:left; }
+			.colresize {font:9pt ; cursor:""; }
+			.input_box {width:80%; }
+		</style>
+        
+		<SCRIPT LANGUAGE="JavaScript">
+
+			var mousedown = false; 
+			var td = ""; 
+			var td_width; 
+			var x = 0; 
+			
+			function TCstartColResize(obj){
+				mousedown = true;
+				td = obj;
+				td_width = td.width;
+				x = event.clientX;
+			}
+			function TCColResize(){
+				if (mousedown){
+					var distX = event.x - x; 
+					td.width = parseInt(td_width) + parseInt(distX);
+				}
+			}
+			function TCstopColResize(){
+				mousedown = false;
+				td = '';
+			}
+			
+			function cell_left(obj){
+				if(event.offsetX < 5 && obj.cellIndex!=0)
+					return true;
+				else 
+					return false;
+			}
+			function cell_right(obj){
+				if(event.offsetX > obj.width-4)
+					return true;
+				else 
+					return false;
+			}
+			
+			
+			document.onmousedown = function(){
+				try{
+					var now_mousedown = window.event.srcElement;
+					if(now_mousedown.className.toUpperCase()=="COLRESIZE"){
+						if( cell_left(now_mousedown) ){
+							now_mousedown = now_mousedown.parentNode.childNodes[now_mousedown.cellIndex-1];
+						}else if( !cell_right(now_mousedown) ){
+							return true;
+						}
+						TCstartColResize(now_mousedown);
+					}
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}
+			
+			
+			document.onmousemove = function(){
+				try{
+					var now_mousemove = window.event.srcElement;
+					if(now_mousemove.className.toUpperCase()=="COLRESIZE" || td!=""){
+						if( cell_left(now_mousemove) || cell_right(now_mousemove) ){
+							now_mousemove.style.cursor = "col-resize";
+						}else{
+							now_mousemove.style.cursor = "";
+						}
+						TCColResize(now_mousemove);
+					}else{
+						now_mousemove.style.cursor = "";
+					}
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}
+			
+			
+			document.onmouseup = function(){
+			try{
+				var now_mouseup = window.event.srcElement;
+				//if(now_mouseup.className=="colResize"){
+					TCstopColResize(now_mouseup);
+				//}
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}
+
+			document.onselectstart = function(){
+				try{
+					if(td != ""){
+						return false;
+					}
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}
+
+		</SCRIPT>        
+        
+    </head>
+    <body>
+		<div style="width:100%;height:100;overflow-x:auto;overflow-y:auto">
+			<table width="430" border="0" cellpadding="3" cellspacing="1" bgcolor="#B8B8B8" nowrap style='table-layout:fixed'>
+				<tr bgcolor="#A5D4D2" align="center" height="25">
+					<td width="35" class="colresize">COL1</td>
+					<td width="35" class="colresize">COL2</td>
+					<td width="70" class="colresize">COL3</td>
+					<td width="30" class="colresize">COL4</td>
+					<td width="50" class="colresize">COL5</td>
+					<td width="70" class="colresize">COL6</td>
+					<td width="70" class="colresize">COL7</td>
+					<td width="70" class="colresize">COL8</td>
+				</tr>
+				<tr bgcolor="#FFFFFF" height="27" align="center">
+					<td><Input type="radio" name="radio"></td>
+					<td>1</td>
+					<td><input type='text' class="input_box"></td>
+					<td><input type='text' class="input_box"></td>
+					<td><select class="input_box"><option>EA</option></select></td>
+					<td><input type='text' class="input_box"></td>
+					<td><input type='text' class="input_box"></td>
+					<td nowrap class="ellipsis">TEST TEST TEST TEST TEST TEST</td>
+				</tr>
+			</table>
+		</div>
+    </body>
+</html>
