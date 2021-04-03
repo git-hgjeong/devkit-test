@@ -25,8 +25,12 @@
 			}
 			function TCColResize(){
 				if (mousedown){
-					var distX = event.x - x; 
-					td.width = parseInt(td_width) + parseInt(distX);
+					var distX = event.x - x;
+					let newWidth = parseInt(td_width) + parseInt(distX);
+					if(newWidth > 50){
+						td.width = parseInt(td_width) + parseInt(distX);
+					} 
+					
 				}
 			}
 			function TCstopColResize(){
