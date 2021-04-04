@@ -61,23 +61,11 @@
                                   <option value="5356">KRX 300 커뮤니케이션서비스</option>
                                   <option value="5357">KRX 300 소재</option>
                                   <option value="5358">KRX 300 필수소비재</option>
-                              </select>
+                                </select>
 
-                              <input type="hidden" name="idx_upclss_cd" value="01" />
-                              <input type="hidden" name="idx_midclss_cd" value="01" />
-                            <div style="position: relative;">
-                                <input ref="comboInput" type="text" name="" value="" size="100" @click="showComboDiv">
-                                <div ref="comboDiv" v-show="comboOpen" style="position: absolute;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: '0px', top: comboTop + 'px' }">
-                                    <ul>
-                                        <li><input type="checkbox" value="1"><label>테스트1</label></li>
-                                        <li><input type="checkbox" value="2"><label>테스트2</label></li>
-                                        <li><input type="checkbox" value="3"><label>테스트3</label></li>
-                                        <li><input type="checkbox" value="4"><label>테스트4</label></li>
-                                    </ul>
-                                    <button type="button" @click="doApplyCombo">적용</button>
-                                    <button type="button" @click="doCloseCombo">닫기</button>
-                                </div>
-                            </div>
+                                <input type="hidden" name="idx_upclss_cd" value="01" />
+                                <input type="hidden" name="idx_midclss_cd" value="01" />
+                                <comp-multi-combo></comp-multi-combo>
                           </td>
                       </tr>
                       <tr>
@@ -204,15 +192,17 @@
 </template>
 
 <script>
+
+import MultiCombo from './MultiCombo';
+
 export default {
+    components: {
+       'comp-multi-combo':MultiCombo
+    },    
     data(){
         return {
             searchArea:{isOpen:true, btnText:"Close"},
-            bottomArea:{isOpen:false, btnText:"Open"},
-            comboWidth:0,
-            comboLeft:0,
-            comboTop:0,
-            comboOpen:false
+            bottomArea:{isOpen:false, btnText:"Open"}
         }
     },
     methods : {
@@ -231,26 +221,11 @@ export default {
                 objArea.btnText = "Open";                
             } 
         },
-        showComboDiv:function(){
-            let height = this.$refs.comboInput.getBoundingClientRect().height;
-            console.log("comboInput:", this.$refs.comboInput.getBoundingClientRect());
-            this.comboTop = height;
-            this.comboOpen = true;
-        },
-        doApplyCombo:function(){
-            this.doCloseCombo();
-        },
-        doCloseCombo:function(){
-            this.comboOpen = false;
-        },
-        handleResize:function(){
-           this.doCloseCombo();
-        }
     },
     created: function () {
     },
 	mounted() {
-        window.addEventListener('resize', this.handleResize);
+        
 	}    
 }
 
