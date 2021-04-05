@@ -8,7 +8,7 @@
               <li><input type="checkbox" name="chk3" id="chk3" value="3"><label for="chk3">테스트3</label></li>
               <li><input type="checkbox" name="chk4" id="chk4" value="4"><label for="chk4">테스트4</label></li>
           </ul>
-          <button type="button" @click="doApplyCombo">적용</button>
+          <button type="button" @click="applyCombo">적용</button>
           <button type="button" @click="hideComboDiv">닫기</button>
       </div>
   </div>
@@ -36,7 +36,7 @@ export default {
         this.comboTop = height;
         this.comboOpen = true;
     },
-    doApplyCombo:function(){
+    applyCombo:function(){
         this.hideComboDiv();
     },
     hideComboDiv:function(){
