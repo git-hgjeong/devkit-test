@@ -4,7 +4,7 @@
       <div ref="comboDiv" v-show="comboOpen" style="position: absolute;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: '0px', top: comboTop + 'px' }" @mouseleave = "hideComboDiv">
           <button type="button" @click="hideComboDiv">X</button>
           <ul>
-              <li v-for="(item, index) in list" :key="item.code"><input type="checkbox" :name="getComboId(index)" :id="getComboId(index)" :value="item.code" v-model="item.isChecked" @change="changeCombo"><label :for="getComboId(index)">{{item.codeName}}</label></li>
+              <li v-for="(item, index) in list" :key="index"><input type="checkbox" :name="getComboId(index)" :id="getComboId(index)" :value="item.code" v-model="item.isChecked" @change="changeCombo"><label :for="getComboId(index)">{{item.codeName}}</label></li>
           </ul>
       </div>
   </div>
