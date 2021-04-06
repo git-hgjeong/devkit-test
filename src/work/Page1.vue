@@ -65,7 +65,7 @@
 
                                 <input type="hidden" name="idx_upclss_cd" value="01" />
                                 <input type="hidden" name="idx_midclss_cd" value="01" />
-                                <comp-multi-combo></comp-multi-combo>
+                                <comp-multi-combo :list="comboList"></comp-multi-combo>
                           </td>
                       </tr>
                       <tr>
@@ -202,7 +202,14 @@ export default {
     data(){
         return {
             searchArea:{isOpen:true, btnText:"Close"},
-            bottomArea:{isOpen:false, btnText:"Open"}
+            bottomArea:{isOpen:false, btnText:"Open"},
+            comboList:[
+                {code:"CD01", codeName:"코드1", isChecked:false},
+                {code:"CD02", codeName:"코드2", isChecked:false},
+                {code:"CD03", codeName:"코드3", isChecked:false},
+                {code:"CD04", codeName:"코드4", isChecked:false},
+                {code:"CD05", codeName:"코드5", isChecked:false},
+            ]
         }
     },
     methods : {
