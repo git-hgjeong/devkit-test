@@ -1,12 +1,11 @@
 <template>
   <div style="position: relative;">
-      <input ref="comboInput" type="text" name="" value="" size="100" @click="showComboDiv">
+      <input ref="comboInput" type="text" name="" :value="comboText" size="100" @click="showComboDiv">
       <div ref="comboDiv" v-show="comboOpen" style="position: absolute;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: '0px', top: comboTop + 'px' }" @mouseleave = "hideComboDiv">
+          <button type="button" @click="hideComboDiv">X</button>
           <ul>
-              <li v-for="(item, index) in list" v-bind:key="list.code"><input type="checkbox" name="chk1" id="chk1" :value="item.code"><label for="chk1">{{item.codeName}}</label></li>
+              <li v-for="(item, index) in list" v-bind:key="list.code"><input type="checkbox" :name="getComboId(index)" :id="getComboId(index)" :value="item.code" v-model="item.isChecked" @change="changeCombo"><label :for="getComboId(index)">{{item.codeName}}</label></li>
           </ul>
-          <button type="button" @click="applyCombo">적용</button>
-          <button type="button" @click="hideComboDiv">닫기</button>
       </div>
   </div>
 </template>  
@@ -14,7 +13,8 @@
 
 export default {  
   props: {
-    list: Array
+    list: Array,
+    id: String
   },
   data: function () {
     return {
@@ -25,9 +25,14 @@ export default {
     }
   },
   computed: {
-    
+    comboText : function(){
+      return "";
+    }
   },
   methods: {
+    getComboId:function(idx){
+      return this.id + idx;
+    },    
     showComboDiv:function(){
         let height = this.$refs.comboInput.getBoundingClientRect().height;
         console.log("comboInput:", this.$refs.comboInput.getBoundingClientRect());
@@ -42,10 +47,16 @@ export default {
     },
     handleResize:function(){
         this.hideComboDiv();
+    },
+    changeCombo:function(){
+      console.log("changed:", this.list);
     }
   },
 	mounted() {
     window.addEventListener('resize', this.handleResize);
+    this.list.forEach(function(value, index) {
+
+    });
   }
 }
 //{key:"", value=""}

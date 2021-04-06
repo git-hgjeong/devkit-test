@@ -205,9 +205,9 @@ export default {
             bottomArea:{isOpen:false, btnText:"Open"},
             comboList:[
                 {code:"CD01", codeName:"코드1", isChecked:false},
-                {code:"CD02", codeName:"코드2", isChecked:false},
+                {code:"CD02", codeName:"코드2", isChecked:true},
                 {code:"CD03", codeName:"코드3", isChecked:false},
-                {code:"CD04", codeName:"코드4", isChecked:false},
+                {code:"CD04", codeName:"코드4", isChecked:true},
                 {code:"CD05", codeName:"코드5", isChecked:false},
             ]
         }
