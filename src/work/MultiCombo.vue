@@ -26,7 +26,16 @@ export default {
   },
   computed: {
     comboText : function(){
-      return "";
+      let text = "";
+      this.list.forEach(function(item, index) {
+        if(item.isChecked){
+          text += "," + item.codeName;
+        }
+      });
+      if(text){
+        text = text.substring(1);
+      }
+      return text;
     }
   },
   methods: {
