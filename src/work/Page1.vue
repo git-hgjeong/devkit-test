@@ -65,7 +65,7 @@
 
                                 <input type="hidden" name="idx_upclss_cd" value="01" />
                                 <input type="hidden" name="idx_midclss_cd" value="01" />
-                                <comp-multi-combo :list="comboList"></comp-multi-combo>
+                                <comp-multi-combo id="chk" :list="comboList"></comp-multi-combo>
                           </td>
                       </tr>
                       <tr>
