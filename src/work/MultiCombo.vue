@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative;">
-      <input ref="comboInput" type="text" name="" :value="comboText" size="100" @click="showComboDiv">
+      <input ref="comboInput" type="text" name="" :value="comboText" size="100" @click="showComboDiv" readonly>
       <div ref="comboDiv" v-show="comboOpen" style="position: absolute;background-color: #fff;z-index:99;padding:10px;border:1px solid #b3b7c4;" :style="{ left: '0px', top: comboTop + 'px' }" @mouseleave = "hideComboDiv">
           <button type="button" @click="hideComboDiv">X</button>
           <ul>
