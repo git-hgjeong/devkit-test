@@ -65,7 +65,7 @@
 
                                 <input type="hidden" name="idx_upclss_cd" value="01" />
                                 <input type="hidden" name="idx_midclss_cd" value="01" />
-                                <comp-multi-combo id="chk" :list="comboList"></comp-multi-combo>
+                                <comp-multi-combo id="chk" :list="comboList" ref="compMultiCombo"></comp-multi-combo>
                           </td>
                       </tr>
                       <tr>
@@ -232,7 +232,9 @@ export default {
     created: function () {
     },
 	mounted() {
-        
+        // 자식 컴포넌트의 함수를 호출
+        let comboData = this.$refs.compMultiCombo.getData(); 
+        console.log("comboData:", comboData);
 	}    
 }
 

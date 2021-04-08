@@ -66,7 +66,11 @@ export default {
           item.isChecked = false;
         }
       });
-    }
+    },
+    getData:function(){
+      let res = this.list.filter(it => it.isChecked);
+      return res;
+    },
   },
 	mounted() {
     window.addEventListener('resize', this.handleResize);
