@@ -189,7 +189,13 @@ export default {
 		}
 	},
 	mounted() {
-
+		//console.log("currentRoute:", router.currentRoute.path);
+		//Routing 처리
+		let path = router.currentRoute.path;
+		let currMenu = this.menuList.filter(item => ("/"+item.link).toLowerCase() == path);
+		if(currMenu && currMenu.length > 0){
+			this.openMdi(currMenu[0]);
+		}
 	}	
 }
 </script>
