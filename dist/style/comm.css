@@ -178,7 +178,7 @@ iframe {margin:0; border:0;}
 */
 .header .headerbottom > span  {display:none; position:absolute; left:0; top:0; background:#5b6473; width:100%;}
 
-section.container {min-width:1200px; width:1200px; margin:0 auto; position:relative; z-index:1;}
+section.container {min-width:1200px; margin:0 auto; position:relative; z-index:1;}
 section.container:after {content:''; clear:both; display:block;}
 
 /* sam... aside.lnb {width:200px; margin-right:40px; height:790px; float:left; border-radius:0 0 0 30px;position:relative;} */
