@@ -168,6 +168,53 @@
     <!-- Table 영역 -->
     <div class="CI-MDI-UNIT-WRAP">
 
+            <table class="grid">
+            <thead>
+            <tr>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+                <th>asdfasdfasdasdf</th>
+            </tr>        
+            </thead>
+            <tbody>
+            <tr>
+                <td class="center">11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+            </tr>
+            <tr>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+            </tr>
+            <tr>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td>11111</td>
+                <td class="right">11111</td>
+            </tr>                        
+            </tbody>
+            </table>    
+
     </div>
     <!-- //Table 영역 -->
 
@@ -241,5 +288,23 @@ export default {
 </script>
 
 <style scoped>
-
+.grid {
+    width:100%;
+}
+.grid thead th {
+    background: #667491;
+    color: #fff;
+    font-weight: 400;
+    border: 1px solid #465A72;
+    padding:10px;
+}
+.grid tbody tr {
+    line-height: 35px;
+}
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
 </style>
