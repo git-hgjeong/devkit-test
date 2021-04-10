@@ -171,14 +171,14 @@
             <table class="grid">
             <thead>
             <tr>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
-                <th>asdfasdfasdasdf</th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
             </tr>        
             </thead>
             <tbody>
