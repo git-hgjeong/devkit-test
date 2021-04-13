@@ -469,8 +469,8 @@ section.container.size_max aside.lnb {height: 880px;}
 section.container.size_max aside.lnb .lnb_tree {height: 816px;}
 section.container.size_max .content {min-height: 880px;}
 
-section.container > .btn_lnb {cursor:pointer; width:39px; height:87px; position:absolute; z-index:5;left:200px; top:40px;display:block;background:url(http://data.krx.co.kr/templets/mdc/img/layout1_on.png) no-repeat 0 0;}
-section.container > .btn_lnb.hide {top:40px; background:url(http://data.krx.co.kr/templets/mdc/img/layout1_off.png) no-repeat 0 0;}
+section.container > div > .btn_lnb {cursor:pointer; width:39px; height:87px; position:absolute; z-index:5;left:200px; top:40px;display:block;background:url(http://data.krx.co.kr/templets/mdc/img/layout1_on.png) no-repeat 0 0;}
+section.container > div > .btn_lnb.hide {top:40px; background:url(http://data.krx.co.kr/templets/mdc/img/layout1_off.png) no-repeat 0 0;}
 section.content > .btn_tab_all_close {width:40px; height:40px; position:absolute; right:-40px; top:0; display:block; background:url(http://data.krx.co.kr/templets/mdc/img/layout3.gif) no-repeat 0 0;}
 section.content > .btn_tab_list_btn {width:40px; height:40px; position:absolute; right:-40px; top:40px; display:block; background:#269cb6 url(http://data.krx.co.kr/templets/mdc/img/layout4.png) no-repeat 9px 8px;}
 section.content > .btn_content_size_btn {width:40px; height:40px; position:absolute; right:-40px; top:80px; display:block; background:url(http://data.krx.co.kr/templets/mdc/img/layout2_on.gif) no-repeat 0 0;}
