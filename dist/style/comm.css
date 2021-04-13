@@ -459,11 +459,11 @@ aside.lnb .lnb_tree_box > ul > li > ul > li > ul > li > ul > li.sel > a {color:#
 
 
 
-section.content {position:relative;width:calc(100% - 240px); font-family:'Malgun Gothic', sans-serif; overflow: visible !important; float:left; min-height:790px; background-color:#ffffff;}
+section.content {position:relative;width:calc(100% - 290px); font-family:'Malgun Gothic', sans-serif; overflow: visible !important; float:left; min-height:790px; background-color:#ffffff;}
 /*aside.lnb.hide > .lnb_search, aside.lnb.hide > .lnb_tree{left:-200px;}*/
 
 section.container.size_max {width:calc(100% - 40px); float:left;}
-section.content.size_max {width:calc(100% - 240px);}
+section.content.size_max {width:calc(100% - 290px);}
 
 section.container.size_max aside.lnb {height: 880px;}
 section.container.size_max aside.lnb .lnb_tree {height: 816px;}
