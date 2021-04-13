@@ -80,6 +80,7 @@ export default {
   padding-left:18px;
   font-size: 14px;
   color: #dddddd;
+  background: url(http://data.krx.co.kr/templets/mdc/img/blit_5dep_off.png) no-repeat;
 }
 .tree-off{
   background: url(http://data.krx.co.kr/templets/mdc/img/blit_4dep_off.png) no-repeat;
