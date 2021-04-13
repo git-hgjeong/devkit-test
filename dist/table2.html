@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>변환</title>
+        
+		<style>
+			.ellipsis {font:9pt ; width:100%; overflow:hidden; text-overflow:ellipsis; text-align:left; }
+			.grid-col-resize {font:9pt ; cursor:""; }
+			.input_box {width:80%; }
+			.grid {
+				table-layout:fixed;
+			}
+			.grid th {
+				table-layout:fixed;
+				overflow:hidden;
+				text-overflow:ellipsis;
+			}			
+		</style>
+        
+
+        
+    </head>
+    <body>
+		<div style="width:100%;height:100;overflow-x:auto;overflow-y:auto">
+			<table width="430" border="0" cellpadding="3" cellspacing="1" bgcolor="#B8B8B8" nowrap class="grid">
+			<thead>
+				<tr bgcolor="#A5D4D2" align="center" height="25">
+					<th width="35" class="grid-col-resize">COL1</th>
+					<th width="35" class="grid-col-resize">COL2</th>
+					<th width="70" class="grid-col-resize">COL3</th>
+					<th width="30" class="grid-col-resize">COL4</th>
+					<th width="50" class="grid-col-resize">COL5</th>
+					<th width="70" class="grid-col-resize">COL6</th>
+					<th width="70" class="grid-col-resize">COL7</th>
+					<th width="70" class="grid-col-resize">COL8</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr bgcolor="#FFFFFF" height="27" align="center">
+					<td><Input type="radio" name="radio"></td>
+					<td>1</td>
+					<td><input type='text' class="input_box"></td>
+					<td><input type='text' class="input_box"></td>
+					<td><select class="input_box"><option>EA</option></select></td>
+					<td><input type='text' class="input_box"></td>
+					<td><input type='text' class="input_box"></td>
+					<td nowrap class="ellipsis">TEST TEST TEST TEST TEST TEST</td>
+				</tr>
+			</tbody>
+			</table>
+			<br>
+			<table border=1 onmousemove="console.log('>> onmousemove <<');">
+			<tr>
+				<td style="cursor:col-resize;">zzzz</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+			</tr>
+			<tr>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+			</tr>
+			<tr>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+				<td>1231312312</td>
+			</tr>						
+			</table>
+		</div>
+		
+		
+		<SCRIPT LANGUAGE="JavaScript">
+			var gridResizeInfo = {mousedown:false, objCol:null, width:0, posX:0};
+
+			document.getElementsByClassName("grid")[0].onmousemove = function(event){
+				try{
+					var obj = event.srcElement;
+					if( grid_isColLeft(obj, event) || grid_isColRight(obj, event) ){
+						obj.style.cursor = "col-resize";
+					}else if(grid_isColResize(obj)){
+						obj.style.cursor = "";
+					}
+
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}
+			
+			document.getElementsByClassName("grid")[0].onmousedown = function(event){
+				try{
+					var now_mousedown = event.srcElement;
+					
+						if( grid_isColLeft(now_mousedown) ){
+							now_mousedown = now_mousedown.parentNode.childNodes[now_mousedown.cellIndex-1];
+						}else if( !grid_isColRight(now_mousedown) ){
+							return true;
+						}
+						//TCstartColResize(now_mousedown);
+
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}			
+			
+			//그리드 리사이즈 대상 여부
+			function grid_isColResize(obj){
+				if(obj && obj.className && obj.className == "grid-col-resize"){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			
+			//테이블 컬럼 좌측 체크
+			function grid_isColLeft(obj, evnt){
+				if(grid_isColResize(obj) && evnt.offsetX < 5 && obj.cellIndex!=0){
+					return true;
+				}else{ 
+					return false;
+				}
+			}
+			//테이블 컬럼 우측 체크
+			function grid_isColRight(obj, evnt){
+				if(grid_isColResize(obj) && evnt.offsetX > obj.width-4){
+					return true;
+				}else{ 
+					return false;
+				}
+			}			
+			
+			//그리드 컬럼 시작 위치
+			function TCstartColResize(obj, evnt){
+				gridResizeInfo.mousedown = true;
+				gridResizeInfo.objCol = obj;
+				width = gridResizeInfo.objCol.width;
+				x = event.clientX;
+			}			
+		</SCRIPT>        		
+    </body>
+</html>
