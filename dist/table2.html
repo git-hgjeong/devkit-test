@@ -81,33 +81,49 @@
 		
 		<SCRIPT LANGUAGE="JavaScript">
 			var gridResizeInfo = {mousedown:false, objCol:null, width:0, posX:0};
-
-			document.getElementsByClassName("grid")[0].onmousemove = function(event){
+			var objGrid = document.getElementsByClassName("grid")[0];
+			//1. 마우스 이동시 리사이즈 아이콘 표시
+			document.onmousemove = function(event){
 				try{
-					var obj = event.srcElement;
-					if( grid_isColLeft(obj, event) || grid_isColRight(obj, event) ){
-						obj.style.cursor = "col-resize";
-					}else if(grid_isColResize(obj)){
-						obj.style.cursor = "";
+					var objSrc = event.srcElement;
+					if(grid_isColResize(objSrc) || gridResizeInfo.objCol){
+						if( grid_isColLeft(objSrc, event) || grid_isColRight(objSrc, event) ){
+							objSrc.style.cursor = "col-resize";
+						}else if(grid_isColResize(objSrc)){
+							objSrc.style.cursor = "";
+						}
+						//3. 마우스 이동거리 계산하여 컬럼 사이즈
+						grid_doResize(event);
 					}
-
 				}catch(e){
 					console.error(e);
 					return true; 
 				}
 			}
 			
-			document.getElementsByClassName("grid")[0].onmousedown = function(event){
+			//2. 리사이즈 시작지점 저장
+			document.onmousedown = function(event){
 				try{
-					var now_mousedown = event.srcElement;
-					
-						if( grid_isColLeft(now_mousedown) ){
-							now_mousedown = now_mousedown.parentNode.childNodes[now_mousedown.cellIndex-1];
-						}else if( !grid_isColRight(now_mousedown) ){
+					var objSrc = event.srcElement;
+					if(grid_isColResize(objSrc)){
+						console.log("onmousedown:", objSrc);
+						if( grid_isColLeft(objSrc, event) ){
+							objSrc = objSrc.parentNode.childNodes[objSrc.cellIndex-1];
+						}else if( !grid_isColRight(objSrc, event) ){
 							return true;
 						}
-						//TCstartColResize(now_mousedown);
+						grid_ResizeStart(objSrc, event);						
+					}
+				}catch(e){
+					console.error(e);
+					return true; 
+				}
+			}			
 
+			//4. 리자이즈 종료
+			document.onmouseup = function(event){
+				try{
+					grid_ResizeFinish();
 				}catch(e){
 					console.error(e);
 					return true; 
@@ -125,7 +141,7 @@
 			
 			//테이블 컬럼 좌측 체크
 			function grid_isColLeft(obj, evnt){
-				if(grid_isColResize(obj) && evnt.offsetX < 5 && obj.cellIndex!=0){
+				if(evnt.offsetX < 5 && obj.cellIndex!=0){
 					return true;
 				}else{ 
 					return false;
@@ -133,20 +149,43 @@
 			}
 			//테이블 컬럼 우측 체크
 			function grid_isColRight(obj, evnt){
-				if(grid_isColResize(obj) && evnt.offsetX > obj.width-4){
+				if(evnt.offsetX > obj.width-4){
 					return true;
 				}else{ 
 					return false;
 				}
 			}			
 			
-			//그리드 컬럼 시작 위치
-			function TCstartColResize(obj, evnt){
+			//그리드 컬럼 시작 위치 저장
+			function grid_ResizeStart(obj, evnt){
 				gridResizeInfo.mousedown = true;
 				gridResizeInfo.objCol = obj;
-				width = gridResizeInfo.objCol.width;
-				x = event.clientX;
-			}			
+				gridResizeInfo.width = gridResizeInfo.objCol.width;
+				gridResizeInfo.posX = event.clientX;
+				console.log("grid_ResizeStart:", JSON.stringify(gridResizeInfo), obj);
+			}
+			
+			//그리드 컬럼 리사이즈
+			function grid_doResize(evnt){
+				//시작위치 체크
+				if (gridResizeInfo.mousedown){
+					var dist = evnt.x - gridResizeInfo.posX;
+					var calc = parseInt(gridResizeInfo.width) + parseInt(dist);
+					console.log("doResize", dist, calc);
+					gridResizeInfo.objCol.width = calc;
+				}
+			}
+			
+			//그리드 리사이즈 정보 초기화.
+			function grid_ResizeFinish(){
+				if(gridResizeInfo.objCol){
+					console.log("clear");
+					gridResizeInfo.mousedown = false;
+					gridResizeInfo.objCol = null;
+					gridResizeInfo.width = 0;
+					gridResizeInfo.posX = 0;
+				}
+			}
 		</SCRIPT>        		
     </body>
 </html>
