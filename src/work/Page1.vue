@@ -168,52 +168,7 @@
     <!-- Table 영역 -->
     <div class="CI-MDI-UNIT-WRAP">
 
-            <table class="grid">
-            <thead>
-            <tr>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-                <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-            </tr>        
-            </thead>
-            <tbody>
-            <tr>
-                <td class="center">11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-            </tr>
-            <tr>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-            </tr>
-            <tr>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td>11111</td>
-                <td class="right">11111</td>
-            </tr>                        
-            </tbody>
-            </table>    
+        <comp-grid></comp-grid>
 
     </div>
     <!-- //Table 영역 -->
@@ -241,10 +196,12 @@
 <script>
 
 import MultiCombo from './MultiCombo';
+import Grid from './Grid';
 
 export default {
     components: {
-       'comp-multi-combo':MultiCombo
+       'comp-multi-combo':MultiCombo,
+       'comp-grid':Grid
     },    
     data(){
         return {
@@ -288,23 +245,4 @@ export default {
 </script>
 
 <style scoped>
-.grid {
-    width:100%;
-}
-.grid thead th {
-    background: #667491;
-    color: #fff;
-    font-weight: 400;
-    border: 1px solid #465A72;
-    padding:10px;
-}
-.grid tbody tr {
-    line-height: 35px;
-}
-.right {
-    text-align: right;
-}
-.center {
-    text-align: center;
-}
 </style>
