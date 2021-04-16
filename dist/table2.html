@@ -22,7 +22,7 @@
         
     </head>
     <body>
-		<div style="width:100%;height:100;overflow-x:auto;overflow-y:auto">
+		<div id="gridWrap" style="width:100%;height:100;overflow-x:auto;overflow-y:auto">
 			<table width="430" border="0" cellpadding="3" cellspacing="1" bgcolor="#B8B8B8" nowrap class="grid">
 			<thead>
 				<tr bgcolor="#A5D4D2" align="center" height="25">
@@ -83,7 +83,7 @@
 			var gridResizeInfo = {mousedown:false, objCol:null, width:0, posX:0};
 			var objGrid = document.getElementsByClassName("grid")[0];
 			//1. 마우스 이동시 리사이즈 아이콘 표시
-			document.onmousemove = function(event){
+			document.getElementById("gridWrap").onmousemove = function(event){
 				try{
 					var objSrc = event.srcElement;
 					if(grid_isColResize(objSrc) || gridResizeInfo.objCol){
@@ -94,6 +94,8 @@
 						}
 						//3. 마우스 이동거리 계산하여 컬럼 사이즈
 						grid_doResize(event);
+					}else{
+						objSrc.style.cursor = "";
 					}
 				}catch(e){
 					console.error(e);
@@ -102,7 +104,7 @@
 			}
 			
 			//2. 리사이즈 시작지점 저장
-			document.onmousedown = function(event){
+			document.getElementById("gridWrap").onmousedown = function(event){
 				try{
 					var objSrc = event.srcElement;
 					if(grid_isColResize(objSrc)){
@@ -121,7 +123,7 @@
 			}			
 
 			//4. 리자이즈 종료
-			document.onmouseup = function(event){
+			document.getElementById("gridWrap").onmouseup = function(event){
 				try{
 					grid_ResizeFinish();
 				}catch(e){
@@ -141,7 +143,7 @@
 			
 			//테이블 컬럼 좌측 체크
 			function grid_isColLeft(obj, evnt){
-				if(evnt.offsetX < 5 && obj.cellIndex!=0){
+				if(evnt.offsetX < 2 && obj.cellIndex!=0){
 					return true;
 				}else{ 
 					return false;
@@ -174,6 +176,10 @@
 					console.log("doResize", dist, calc);
 					gridResizeInfo.objCol.width = calc;
 				}
+			}
+			
+			function grid_ClearCursor(){
+				
 			}
 			
 			//그리드 리사이즈 정보 초기화.
