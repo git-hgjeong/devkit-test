@@ -16,7 +16,7 @@
 				<!--b:s-->
 				<!-- CONTENT IN-->
 				<ul class="tab1 CI-MDI-TAB-WRAP" id="jsMdiTab">
-					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB" :class="{on2 : item.isSelect}"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="activeMdiTab(item, index)">{{item.name}}</span><button type="button" @click="activeMdiTabClose(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
+					<li v-for="(item, index) in midMenuList" v-bind:key="item.mid" class="CI-MDI-TAB" :class="{on2 : item.isSelect}"><a href="javascript:void(0);" v-bind:title="'['+item.mid+']'+' '+item.name" class="CI-MDI-TAB-NAME"><span @click="activeMdiTab(item, index)">{{item.name}}</span><button type="button" @click="closeMdiTab(index)" title="닫기" class="CI-MDI-TAB-CLOSE"></button></a></li>
 				</ul>
 				<section class="contents_in">
 					<div id="jsMdiContent" class="CI-MDI-CONTENT-WRAP">
@@ -28,7 +28,7 @@
 						<!-- //Page-->
 					</div>
 				</section>
-				<button type="button" class="btn_tab_all_close" id="jsCloseAllViewsButton" title="탭 전체닫기"></button>
+				<button type="button" class="btn_tab_all_close" id="jsCloseAllViewsButton" title="탭 전체닫기" @click="closeAllMdi"></button>
 				<button type="button" class="btn_tab_list_btn" id="jsMdiTabListButton" title="탭 목록"></button>
 				<button type="button" class="btn_content_size_btn" id="jsViewSizeButton" title="컨텐츠 확대/축소"></button>
 				<div class="mdi_tab_list CI-MDI-TAB-LIST">
@@ -139,7 +139,7 @@ export default {
     },	
 	methods: {
 		openMdi(item){
-			
+			console.log("openMdi:", item);
 			let mid = item["mid"];
 			let result = this.midMenuList.filter(item => item.mid == mid);
 			if(item.link){
@@ -166,10 +166,10 @@ export default {
 				}
 			});	
 		},
-		activeMdiTabClose(index){
+		closeMdiTab(index){
 			this.midMenuList.splice(index, 1);
 			if(this.midMenuList.length <=0 ){
-				router.push({ path: "/"});
+				//router.push({ path: "/"});
 			}else{
 				let lastItem = this.midMenuList[this.midMenuList.length-1];
 				this.activeMdiTab(lastItem);
@@ -186,6 +186,12 @@ export default {
 		},
 		getMdiComponentName(link){
 			return require(link);
+		},
+		closeAllMdi(){
+			let cnt = this.midMenuList.length - 1;
+			for(let i=cnt;i>=0;i--){
+				this.closeMdiTab(i);
+			}
 		}
 	},
 	mounted() {
