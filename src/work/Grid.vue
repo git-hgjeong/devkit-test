@@ -52,7 +52,8 @@
 
 export default {  
   props: {
-
+    list: Array,
+    header: Array      
   },
   data: function () {
     return {
@@ -66,7 +67,8 @@ export default {
 
   },
 	mounted() {
-
+        console.log("header:", this.header);
+        console.log("list:", this.list);
   }
 }
 //{key:"", value=""}

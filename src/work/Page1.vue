@@ -168,7 +168,7 @@
     <!-- Table 영역 -->
     <div class="CI-MDI-UNIT-WRAP">
 
-        <comp-grid></comp-grid>
+        <comp-grid :list="gridData" :header="gridHeader"></comp-grid>
 
     </div>
     <!-- //Table 영역 -->
@@ -179,7 +179,7 @@
             <button type="button" class="CI-MDI-COMPONENT-BUTTON" @click="toggleBottomArea">{{bottomArea.btnText}}</button>
 
             <div data-component="footer" v-show="bottomArea.isOpen">
-                <span><dfn>컨텐츠 문의</dfn>&nbsp;:&nbsp;(경)인덱스사업부, &nbsp;고객센터 (1577-0088)</span>
+                <span><dfn>컨텐츠 문의</dfn>&nbsp;:&nbsp;xxxxx사업부, &nbsp;고객센터 (1577-xxxx)</span>
 
                 <p>
                     <span class="">주</span><span><em>1.</em><dfn>종가/시가총액은 조회기간 말일 기준입니다.</dfn><em>2.</em><dfn>거래량/거래대금은 조회기간 동안의 누적 규모에 해당합니다.</dfn></span>
@@ -213,6 +213,36 @@ export default {
                 {code:"CD03", codeName:"코드3", isChecked:false},
                 {code:"CD04", codeName:"코드4", isChecked:true},
                 {code:"CD05", codeName:"코드5", isChecked:false},
+            ],
+            gridHeader:[
+                {id:"col1", text:"컬럼1"},
+                {id:"col2", text:"컬럼2"},
+                {id:"col3", text:"컬럼3"},
+                {id:"col4", text:"컬럼4"},
+                {id:"col5", text:"컬럼5"},
+                {id:"col6", text:"컬럼6"}
+            ],
+            gridData:[
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
             ]
         }
     },
