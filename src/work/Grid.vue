@@ -8,7 +8,7 @@
   </thead>
   <tbody>
   <tr v-for="(item, index) in list" :key="index">
-      <td>{{item.col1}}</td>
+      <td v-for="(h_item, h_index) in header" :key="h_index">{{item[h_item.id]}}</td>
   </tr>      
   </tbody>
   </table>
