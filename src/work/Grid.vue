@@ -3,47 +3,13 @@
   <table class="grid">
   <thead>
   <tr>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
-      <th><span>asdfasdfasdasdf</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
+      <th v-for="(item, index) in header" :key="index"><span>{{item.text}}</span><a href="javascript:void(0);" class="" style="float:right">↕</a></th>
   </tr>        
   </thead>
   <tbody>
-  <tr>
-      <td class="center">11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-  </tr>
-  <tr>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-  </tr>
-  <tr>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td>11111</td>
-      <td class="right">11111</td>
-  </tr>                        
+  <tr v-for="(item, index) in list" :key="index">
+      <td>{{item.col1}}</td>
+  </tr>      
   </tbody>
   </table>
 </div>
