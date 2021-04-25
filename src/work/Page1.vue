@@ -215,15 +215,15 @@ export default {
                 {code:"CD05", codeName:"코드5", isChecked:false},
             ],
             gridHeader:[
-                {id:"col1", text:"컬럼1"},
-                {id:"col2", text:"컬럼2"},
-                {id:"col3", text:"컬럼3"},
-                {id:"col4", text:"컬럼4"},
-                {id:"col5", text:"컬럼5"},
-                {id:"col6", text:"컬럼6"}
+                {id:"col1", text:"컬럼1", align:"left"},
+                {id:"col2", text:"컬럼2", align:"center"},
+                {id:"col3", text:"컬럼3", align:"center"},
+                {id:"col4", text:"컬럼4", align:"center"},
+                {id:"col5", text:"컬럼5", align:"center"},
+                {id:"col6", text:"컬럼6", align:"center"}
             ],
             gridData:[
-                {col1:"11111", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
+                {col1:"11111", col2:"aaaaaa", col3:"bbbbbb", col4:"cccccc", col5:"dddddd", col6:"eeeeee"},
                 {col1:"11112", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
                 {col1:"11113", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
                 {col1:"11114", col2:"222222", col3:"222222", col4:"222222", col5:"222222", col6:"222222"},
